@@ -1,0 +1,116 @@
+2025-02-01 17:26:35 INFO: Submit button pressed.
+2025-02-01 17:26:35 INFO: Mode selected: fixes
+2025-02-01 17:26:35 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
+2025-02-01 17:26:35 DEBUG: Starting new HTTPS connection (1): github.com:443
+2025-02-01 17:26:36 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
+2025-02-01 17:26:36 INFO: Received response with status code: 200
+2025-02-01 17:26:36 DEBUG: HTML snippet for fix page: 
+
+
+
+
+
+
+<!DOCTYPE html>
+<html
+  lang="en"
+  
+  data-color-mode="auto" data-light-theme="light" data-dark-theme="dark"
+  data-a11y-animated-images="system" data-a11y-link-underlines="true"
+  
+  >
+
+
+
+  <head>
+    <meta charset="utf-8">
+  <link rel="dns-prefetch" href="https://github.githubassets.com">
+...
+2025-02-01 17:26:36 INFO: Found 0 fix rows
+2025-02-01 17:26:36 INFO: Finished scraping fixes. Total fixes: 0
+2025-02-01 17:26:36 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes444.json
+2025-02-01 17:35:16 INFO: Submit button pressed.
+2025-02-01 17:35:16 INFO: Mode selected: fixes
+2025-02-01 17:35:16 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
+2025-02-01 17:35:16 DEBUG: Starting new HTTPS connection (1): github.com:443
+2025-02-01 17:35:17 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
+2025-02-01 17:35:17 INFO: Received response with status code: 200
+2025-02-01 17:35:17 INFO: Found 16 conversation items
+2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
+2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
+2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
+2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
+2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
+2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
+2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
+2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
+2025-02-01 17:35:17 INFO: Finished scraping fixes. Total responses: 8
+2025-02-01 17:35:17 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fix2222.json
+2025-02-01 18:01:32 INFO: Submit button pressed.
+2025-02-01 18:01:32 INFO: Mode selected: fixes
+2025-02-01 18:01:32 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/issues
+2025-02-01 18:01:32 DEBUG: Starting new HTTPS connection (1): github.com:443
+2025-02-01 18:01:33 DEBUG: https://github.com:443 "GET /vercel/nft/issues HTTP/1.1" 200 None
+2025-02-01 18:01:33 INFO: Received response with status code: 200
+2025-02-01 18:01:33 INFO: Found 0 conversation items
+2025-02-01 18:01:33 INFO: Finished scraping fixes. Total responses: 0
+2025-02-01 18:01:33 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes.json
+2025-02-01 18:01:56 INFO: Submit button pressed.
+2025-02-01 18:01:56 INFO: Mode selected: fixes
+2025-02-01 18:01:56 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
+2025-02-01 18:01:56 DEBUG: Starting new HTTPS connection (1): github.com:443
+2025-02-01 18:01:57 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
+2025-02-01 18:01:57 INFO: Received response with status code: 200
+2025-02-01 18:01:57 INFO: Found 16 conversation items
+2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:01:57 INFO: Finished scraping fixes. Total responses: 8
+2025-02-01 18:01:57 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes999.json
+2025-02-01 18:05:36 INFO: Submit button pressed.
+2025-02-01 18:05:36 INFO: Mode selected: fixes
+2025-02-01 18:05:36 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
+2025-02-01 18:05:36 DEBUG: Starting new HTTPS connection (1): github.com:443
+2025-02-01 18:05:37 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
+2025-02-01 18:05:37 INFO: Received response with status code: 200
+2025-02-01 18:05:37 INFO: Found 16 conversation items
+2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:05:37 INFO: Duplicate item skipped: {'id': 'e8644d62-3114-479b-a35e-1d4d048271a8', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
+2025-02-01 18:05:37 INFO: Duplicate item skipped: {'id': '768bae17-0954-406b-9cd3-5e019dcb98f6', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
+2025-02-01 18:05:37 INFO: Duplicate item skipped: {'id': '559694fe-1185-4ea6-ba67-52af1cc8253b', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
+2025-02-01 18:05:37 INFO: Duplicate item skipped: {'id': '292da71c-ea21-481f-9d93-2338f60cc473', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
+2025-02-01 18:05:37 INFO: Finished scraping fixes. Total unique responses: 4
+2025-02-01 18:05:37 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes.json
+2025-02-01 18:09:54 INFO: Submit button pressed.
+2025-02-01 18:09:54 INFO: Mode selected: fixes
+2025-02-01 18:09:54 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
+2025-02-01 18:09:54 DEBUG: Starting new HTTPS connection (1): github.com:443
+2025-02-01 18:09:54 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
+2025-02-01 18:09:55 INFO: Received response with status code: 200
+2025-02-01 18:09:55 INFO: Found 16 conversation items
+2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
+2025-02-01 18:09:55 INFO: Duplicate item skipped: {'id': 'ebfb88b5-3bf2-4362-89d5-3f5841c5c9c5', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
+2025-02-01 18:09:55 INFO: Duplicate item skipped: {'id': '55472a6d-cb5e-43b0-af86-1618b78f93a2', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
+2025-02-01 18:09:55 INFO: Duplicate item skipped: {'id': 'ccbffa3c-0b26-4c3a-aea7-af7e5244e059', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
+2025-02-01 18:09:55 INFO: Duplicate item skipped: {'id': 'b90abd5b-f152-43ed-807d-ec0f30613fe5', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
+2025-02-01 18:09:55 INFO: Finished scraping fixes. Total unique responses: 4
+2025-02-01 18:09:55 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes.json
