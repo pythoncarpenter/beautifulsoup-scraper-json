@@ -1,38 +1,137 @@
 #!/bin/bash
-# run_product.sh
-#
-# This script launches the main executable of the project,
-# which starts the Tkinter GUI and triggers the scraping process.
-#
-# It automatically ensures:
-#   - XQuartz is running (if not, it launches it),
-#   - The DISPLAY environment variable is set,
-#   - The project is run inside the pipenv virtual environment.
-#
-# Usage:
-#   ./run_product.sh
+# run.sh - Comprehensive one-click setup with recursive retry, network timeout handling,
+# and graceful error handling for first-time execution.
 
-# 1. Check if XQuartz is running (for X11-based GUIs)
-if ! pgrep -x "XQuartz" > /dev/null; then
-    echo "XQuartz does not appear to be running. Launching XQuartz..."
-    open -a XQuartz
-    sleep 2
-fi
+# --- Enable Strict Error Handling ---
+set -euo pipefail
+trap 'echo "Error occurred at line ${LINENO}. Exiting." && exit 1' ERR
 
-# 2. Check and set the DISPLAY variable if not already set.
-if [ -z "$DISPLAY" ]; then
-    echo "DISPLAY variable is not set. Setting it to default :0.0 for local GUI tests."
-    export DISPLAY=:0.0
-fi
+# --- Function: Retry pipenv install with network timeout handling ---
+retry_pipenv_install() {
+    local retries=3
+    local count=1
+    while [ $count -le $retries ]; do
+        echo "Attempt $count of $retries: Running 'pipenv install'..."
+        if pipenv install; then
+            echo "pipenv install succeeded."
+            return 0
+        else
+            echo "Attempt $count failed. Possible network issue. Retrying in 5 seconds..."
+            sleep 5
+        fi
+        count=$((count + 1))
+    done
+    echo "pipenv install failed after $retries attempts."
+    return 1
+}
 
-# 3. Check if we're in a pipenv virtual environment.
-if [ -z "$VIRTUAL_ENV" ]; then
-    echo "Not inside a pipenv shell. Running using 'pipenv run'..."
-    # This runs the application within the virtual environment without manual intervention.
-    pipenv run python scrape.py
-else
-    echo "Inside pipenv environment. Running the application..."
-    python scrape.py
-fi
+# --- Function: Check and wait for XQuartz on macOS (recursive) ---
+check_xquartz_recursive() {
+    if pgrep -x "XQuartz" > /dev/null; then
+        echo "XQuartz is running."
+    else
+        echo "XQuartz not running. Retrying in 2 seconds..."
+        sleep 2
+        check_xquartz_recursive  # Recursive call until XQuartz is detected.
+    fi
+}
 
-# End of run_product.sh
+# --- Function: Setup environment and run scraper (recursive retry) ---
+setup_and_run() {
+    local attempt="${1:-1}"
+    local max_attempts=5
+
+    echo "Setup attempt $attempt of $max_attempts..."
+
+    # Step 0: Ensure key files have execute permissions.
+    chmod +x run.sh scrape.py setup_env.sh || echo "Warning: Could not update permissions for some files."
+
+    # Step 1: Check for pipenv.
+    if ! command -v pipenv >/dev/null 2>&1; then
+        echo "Error: pipenv is not installed. Please install pipenv and try again." >&2
+        exit 1
+    fi
+
+    # Step 2: Verify that Pipfile exists.
+    if [ ! -f "Pipfile" ]; then
+        echo "Error: Pipfile not found in the repository. Aborting." >&2
+        exit 1
+    fi
+
+    # Step 3: Ensure the virtual environment exists; if not, create it.
+    venv_path=$(pipenv --venv 2>/dev/null || true)
+    if [ -z "$venv_path" ] || [ ! -d "$venv_path" ]; then
+        echo "Virtual environment not found. Running 'pipenv install'..."
+        if ! retry_pipenv_install; then
+            echo "Error: 'pipenv install' failed. Aborting."
+            exit 1
+        fi
+        # After installing, recursively call setup_and_run to re-check the environment.
+        if [ "$attempt" -lt "$max_attempts" ]; then
+            sleep 2
+            setup_and_run $((attempt + 1))
+            return
+        else
+            echo "Max attempts reached while creating virtual environment. Aborting."
+            exit 1
+        fi
+    fi
+
+    # Step 4: Check that the Python version is correct (3.12 expected).
+    expected_python="3.12"
+    venv_python_version=$(pipenv run python -c "import sys; print('.'.join(map(str, sys.version_info[:2])))" 2>/dev/null)
+    if [ "$venv_python_version" != "$expected_python" ]; then
+        echo "Error: Python version in virtual environment ($venv_python_version) does not match expected ($expected_python)." >&2
+        exit 1
+    fi
+
+    # Step 5: Verify required packages are installed.
+    required_packages=("pandas" "numpy" "statsmodels" "matplotlib" "openai")
+    pipenv run pip list > /tmp/installed_packages.txt
+    for pkg in "${required_packages[@]}"; do
+        if ! grep -qi "$pkg" /tmp/installed_packages.txt; then
+            echo "Error: Package '$pkg' is not installed in the virtual environment." >&2
+            rm /tmp/installed_packages.txt
+            exit 1
+        fi
+    done
+    rm /tmp/installed_packages.txt
+    echo "Environment checks passed."
+
+    # Step 6: Setup system-specific GUI engine.
+    os_type=$(uname)
+    if [[ "$os_type" == "Darwin" ]]; then
+        # On macOS, ensure XQuartz is running.
+        if ! pgrep -x "XQuartz" > /dev/null; then
+            echo "XQuartz is not running. Launching XQuartz..."
+            open -a XQuartz || { echo "Error: Failed to launch XQuartz. Aborting."; exit 1; }
+        fi
+        # Use recursive function to wait for XQuartz.
+        check_xquartz_recursive
+        # Set DISPLAY if not already set.
+        if [ -z "${DISPLAY:-}" ]; then
+            echo "DISPLAY variable not set. Setting to :0.0 for GUI support."
+            export DISPLAY=:0.0
+        fi
+    elif [[ "$os_type" == "Linux" ]]; then
+        if [ -z "${DISPLAY:-}" ]; then
+            echo "Warning: DISPLAY is not set. Ensure an X server is running for GUI support." >&2
+        fi
+    elif [[ "$os_type" == MINGW* || "$os_type" == CYGWIN* ]]; then
+        echo "Windows detected. Please ensure you have a compatible GUI engine available." >&2
+    fi
+
+    # Step 7: Run the scraper application.
+    echo "Starting the scraper application..."
+    if [ -z "${VIRTUAL_ENV:-}" ]; then
+        pipenv run python scrape.py || { echo "Error: Running scrape.py failed."; exit 1; }
+    else
+        python scrape.py || { echo "Error: Running scrape.py failed."; exit 1; }
+    fi
+
+    echo "Scraper application completed successfully."
+    echo "Check scrape.log and the output JSON file for results."
+}
+
+# --- Kick Off the Setup Process ---
+setup_and_run 1
