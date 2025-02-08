@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 import os
 import requests
+import pandas
+import matplotlib
 from bs4 import BeautifulSoup
+import openai
 import json
 import tkinter as tk
 import logging

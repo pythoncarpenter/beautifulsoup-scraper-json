@@ -44,7 +44,7 @@ setup_and_run() {
     echo "Setup attempt $attempt of $max_attempts..."
 
     # Step 0: Ensure key files have execute permissions.
-    chmod +x run.sh scrape.py setup_env.sh || echo "Warning: Could not update permissions for some files."
+    chmod +x run.sh main.py setup_env.sh || echo "Warning: Could not update permissions for some files."
 
     # Step 1: Check for pipenv.
     if ! command -v pipenv >/dev/null 2>&1; then
@@ -85,23 +85,17 @@ setup_and_run() {
         exit 1
     fi
 
-    # Step 5: Verify required packages are installed.
-    required_packages=("pandas" "numpy" "statsmodels" "matplotlib" "openai")
-    pipenv run pip list > /tmp/installed_packages.txt
-    for pkg in "${required_packages[@]}"; do
-        if ! grep -qi "$pkg" /tmp/installed_packages.txt; then
-            echo "Error: Package '$pkg' is not installed in the virtual environment." >&2
-            rm /tmp/installed_packages.txt
-            exit 1
-        fi
-    done
-    rm /tmp/installed_packages.txt
+    # Step 5: (Optional) Verify packages are installed.
+    #         Removed strict checks for pandas, numpy, statsmodels, matplotlib, and openai.
+    #         If you have specific packages you DO want to enforce, add them here.
+
     echo "Environment checks passed."
 
     # Step 6: Setup system-specific GUI engine.
     os_type=$(uname)
     if [[ "$os_type" == "Darwin" ]]; then
-        # On macOS, ensure XQuartz is running.
+        # On macOS, ensure XQuartz is running if your application needs X11.
+        # Remove or comment out these lines if you don't need XQuartz at all:
         if ! pgrep -x "XQuartz" > /dev/null; then
             echo "XQuartz is not running. Launching XQuartz..."
             open -a XQuartz || { echo "Error: Failed to launch XQuartz. Aborting."; exit 1; }
@@ -124,9 +118,9 @@ setup_and_run() {
     # Step 7: Run the scraper application.
     echo "Starting the scraper application..."
     if [ -z "${VIRTUAL_ENV:-}" ]; then
-        pipenv run python scrape.py || { echo "Error: Running scrape.py failed."; exit 1; }
+        pipenv run python main.py || { echo "Error: Running main.py failed."; exit 1; }
     else
-        python scrape.py || { echo "Error: Running scrape.py failed."; exit 1; }
+        python main.py || { echo "Error: Running main.py failed."; exit 1; }
     fi
 
     echo "Scraper application completed successfully."

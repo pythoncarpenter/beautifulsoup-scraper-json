@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 beautifulsoup4 = "*"
 requests = "*"
+pandas = "*"
+statsmodels = "*"
+matplotlib = "*"
+openai = "*"
 
 [dev-packages]
 
