@@ -17,6 +17,21 @@ import queue
 # Global flag to indicate whether submission was made
 submitted = False
 logger = None  # Initialize logger to None
+# --- (All utility functions: parse_repo_url, extract_keywords, etc., will go here) ---
+
+def main():
+    """Main entry point for the application."""
+    setup_logging()
+    load_environment_variables()
+
+    root = create_gui()
+    root.mainloop()
+
+    if not submitted:  # Use the global variable
+        logger.error("No submission was made. Script did not perform any task.")
+        sys.exit(1)  # Exit with an error code
+    else:
+        logger.info("GUI terminated successfully. Script finished.")
 
 def setup_logging():
     """Configures the logging for the application."""
@@ -151,14 +166,14 @@ def write_chunk_to_file(file_handle, chunk, first_item_flag):
 def scrape_github_issues_with_filter(url, output_path, keywords, chunk_size=50, per_page=100, max_pages=200):
     """
     Scrapes issues, handles errors, and writes output.  Returns the output path on success,
-    or an error string on failure.
+    or an error string on failure.  Also prints counts of unrelated and candidate issues.
     """
     logger.info("Starting filtered scrape for URL: %s", url)
     try:
         owner, repo = parse_repo_url(url)
     except ValueError as e:
         logger.error("Error in URL parsing: %s", e)
-        return f"Error: Invalid GitHub issues URL: {e}" # Return error string
+        return f"Error: Invalid GitHub issues URL: {e}"
 
     token = os.getenv("GITHUB_TOKEN", "")
     if not token:
@@ -172,17 +187,18 @@ def scrape_github_issues_with_filter(url, output_path, keywords, chunk_size=50, 
     session = requests.Session()
     page = 1
     chunk = []
-    first_item_flag = [True]  # Used for proper JSON formatting
+    first_item_flag = [True]
+    unrelated_count = 0  # Initialize counter for unrelated issues
+    candidate_count = 0  # Initialize counter for candidate issues
 
     three_months_ago = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=90)
     logger.debug("Only processing issues from after: %s", three_months_ago.isoformat())
 
     with open(output_path, "w", encoding="utf-8") as f_out:
-        # Write header with timestamp and keywords.
         timestamp = datetime.datetime.now().isoformat()
         f_out.write("// Timestamp: " + timestamp + "\n")
         f_out.write("// Keywords: " + ", ".join(keywords) + "\n")
-        f_out.write("[\n")  # Start JSON array
+        f_out.write("[\n")
         logger.debug("Output file %s initialized with header.", output_path)
 
         while page <= max_pages:
@@ -194,10 +210,9 @@ def scrape_github_issues_with_filter(url, output_path, keywords, chunk_size=50, 
                     params={"state": "all", "page": page, "per_page": per_page},
                     timeout=10
                 )
-                resp.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+                resp.raise_for_status()
                 batch = resp.json()
 
-                # Add checks for unexpected API responses
                 if not isinstance(batch, list):
                     logger.error("Unexpected response from GitHub API: %s", resp.text)
                     return "Error: Unexpected response from GitHub API"
@@ -234,6 +249,7 @@ def scrape_github_issues_with_filter(url, output_path, keywords, chunk_size=50, 
 
             if not any(kw.lower() in page_text for kw in keywords):
                 logger.info("No keywords found in page %d; skipping.", page)
+                unrelated_count += len(batch)  # Count all issues on skipped pages as unrelated
                 if len(batch) < per_page:
                     break
                 page += 1
@@ -241,17 +257,21 @@ def scrape_github_issues_with_filter(url, output_path, keywords, chunk_size=50, 
 
             for item in batch:
                 if "pull_request" in item:
+                    unrelated_count += 1  # Count pull requests as unrelated
                     continue
+
                 created_at_str = item.get("created_at")
                 if created_at_str:
                     try:
                         issue_date = datetime.datetime.fromisoformat(created_at_str.replace("Z", "+00:00"))
                     except Exception as e:
                         logger.error("Error parsing created_at for an issue: %s", e)
-                        continue
+                        continue  # Skip to the next issue if date parsing fails
                     if issue_date < three_months_ago:
+                        unrelated_count += 1  # Count old issues as unrelated
                         continue
                 else:
+                    unrelated_count += 1  # Count issues without a date as unrelated
                     continue
 
                 if issue_matches(item, keywords):
@@ -262,11 +282,14 @@ def scrape_github_issues_with_filter(url, output_path, keywords, chunk_size=50, 
                         "url": item.get("html_url")
                     }
                     chunk.append(minimal_item)
+                    candidate_count += 1  # Count matching issues as candidates
                     logger.debug("Added issue #%s to chunk.", item.get("number"))
                     if len(chunk) >= chunk_size:
                         write_chunk_to_file(f_out, chunk, first_item_flag)
                         logger.debug("Chunk written to file. Resetting chunk.")
                         chunk = []
+                else:
+                    unrelated_count += 1  # Count non-matching issues as unrelated
 
             if is_final_page:
                 logger.info("Reached issues older than cutoff on page %d; stopping.", page)
@@ -277,11 +300,12 @@ def scrape_github_issues_with_filter(url, output_path, keywords, chunk_size=50, 
         if chunk:
             write_chunk_to_file(f_out, chunk, first_item_flag)
             logger.debug("Final chunk written to file.")
-        f_out.write("\n]")  # End JSON array
+        f_out.write("\n]")
         logger.info("Finished writing output to %s", output_path)
 
+    print(f"Unrelated issues: {unrelated_count}")  # Print the counts
+    print(f"Candidate issues: {candidate_count}")
     return output_path
-
 def create_gui():
     """Creates and configures the Tkinter GUI."""
     root = tk.Tk()
@@ -354,10 +378,69 @@ def on_submit(root, url_text, prompt_text, output_entry, keywords_label, submit_
     if not output_path.endswith(".json"):
         output_path += ".json"
     logger.debug("Output path resolved to: %s", output_path)
-
-    # --- 4. Keyword Extraction ---
+# --- 4. Keyword Extraction ---
     try:
         keywords = get_filtered_keywords(prompt_value, url_value)
         keywords_label.config(text="Extracted Keywords: " + ", ".join(keywords))
     except Exception as e:
-        messagebox.showerror("
+        messagebox.showerror("Error", f"Keyword extraction failed: {e}") # <- Corrected f-string
+        reset_gui(url_text, prompt_text, output_entry, submit_button, keywords_label)
+        return
+    # --- 5. Threading and Queue Setup ---
+    result_queue = queue.Queue()  # Create a queue for inter-thread communication
+
+    def scraping_task_with_queue(url, output_path, keywords, result_queue):
+        try:
+            result = scrape_github_issues_with_filter(url, output_path, keywords)
+            result_queue.put(result)  # Put the result (output path or error) into the queue
+        except Exception as e:
+            result_queue.put(str(e)) # Put any exception into the queue
+
+    thread = threading.Thread(target=scraping_task_with_queue, args=(url_value, output_path, keywords, result_queue), daemon=True)
+    thread.start()
+
+    # --- 6. Start Checking the Queue ---
+    root.after(100, check_queue, root, result_queue, url_text, prompt_text, output_entry, submit_button, keywords_label)
+
+def check_queue(root, result_queue, url_text, prompt_text, output_entry, submit_button, keywords_label):
+    """Checks the result queue and updates the GUI accordingly."""
+    try:
+        result = result_queue.get_nowait()  # Non-blocking get from the queue
+
+        if isinstance(result, str) and result.startswith("Error:"):  # Check for error messages
+            messagebox.showerror("Error", result)
+            reset_gui(url_text, prompt_text, output_entry, submit_button, keywords_label)
+        elif result:  # If it's a successful result (output path)
+             show_done_and_close(result, root)
+        else: #should never reach here
+            messagebox.showerror("Error", "Unknown error during scraping.")
+            reset_gui(url_text, prompt_text, output_entry, submit_button, keywords_label)
+
+    except queue.Empty:
+        # If the queue is empty, schedule another check after a short delay
+        root.after(100, check_queue, root, result_queue, url_text, prompt_text, output_entry, submit_button, keywords_label)
+
+    except Exception as e:
+        messagebox.showerror("Error", f"An unexpected error occurred: {e}") #<- Corrected f-string
+        reset_gui(url_text, prompt_text, output_entry, submit_button, keywords_label)
+
+
+def reset_gui(url_text, prompt_text, output_entry, submit_button, keywords_label):
+    """Resets the GUI to its initial state."""
+    global submitted
+    submitted = False
+    url_text.config(state="normal")
+    prompt_text.config(state="normal")
+    output_entry.config(state="normal")
+    submit_button.config(state="normal", text="Submit")
+    keywords_label.config(text="Extracted Keywords: (none yet)")
+
+
+def show_done_and_close(output_path, root):
+    """Show a message box indicating completion, then close the GUI."""
+    logger.debug("Showing done message box.")
+    messagebox.showinfo("Done", "Scraping completed; results written to " + output_path)
+    root.destroy()  # Use destroy to close the GUI
+
+if __name__ == "__main__":
+    main()

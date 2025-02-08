@@ -746,3 +746,84 @@ Ever since upgrading to Neovim 0.9, I've noticed a severe performance degradatio
 2025-02-08 02:38:30 DEBUG: Window close requested after submission; waiting for task to finish.
 2025-02-08 02:38:30 DEBUG: Window close requested after submission; waiting for task to finish.
 2025-02-08 02:38:33 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 10:40:39 DEBUG: Logging initialized. Project root: /Users/mitchmcquoid/z9b-projects/business_proj/www-gh-comms-scr
+2025-02-08 10:40:40 DEBUG: Tkinter GUI initialized.
+2025-02-08 10:45:05 DEBUG: Submit button clicked.
+2025-02-08 10:45:05 DEBUG: Output path resolved to: /Users/mitchmcquoid/Desktop/Issues.json
+2025-02-08 10:45:05 DEBUG: Getting filtered keywords for URL: https://github.com/vercel/vercel/issues
+2025-02-08 10:45:05 DEBUG: Extracting keywords from prompt text.
+2025-02-08 10:45:05 DEBUG: Extracted keywords: ['build', 'deployment', 'recently', 'environment', 'information', 'issue', 'provide', 'vercel', 'appears', 'appears hanging']
+2025-02-08 10:45:05 DEBUG: Parsing repository URL: https://github.com/vercel/vercel/issues
+2025-02-08 10:45:05 DEBUG: Parsed owner: vercel, repo: vercel
+2025-02-08 10:45:05 DEBUG: Filtered keywords: ['build', 'deployment', 'recently', 'environment', 'information', 'provide', 'appears', 'appears hanging']
+2025-02-08 10:45:05 INFO: Starting filtered scrape for URL: https://github.com/vercel/vercel/issues
+2025-02-08 10:45:05 DEBUG: Parsing repository URL: https://github.com/vercel/vercel/issues
+2025-02-08 10:45:05 DEBUG: Parsed owner: vercel, repo: vercel
+2025-02-08 10:45:05 DEBUG: Only processing issues from after: 2024-11-10T15:45:05.373010+00:00
+2025-02-08 10:45:05 DEBUG: Output file /Users/mitchmcquoid/Desktop/Issues.json initialized with header.
+2025-02-08 10:45:05 INFO: Fetching page 1
+2025-02-08 10:45:05 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 10:45:06 DEBUG: https://api.github.com:443 "GET /repos/vercel/vercel/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 10:45:06 DEBUG: Is final page? False
+2025-02-08 10:45:06 DEBUG: Issue #13001 matches keyword: build
+2025-02-08 10:45:06 DEBUG: Added issue #13001 to chunk.
+2025-02-08 10:45:06 DEBUG: Issue #13000 matches keyword: build
+2025-02-08 10:45:06 DEBUG: Added issue #13000 to chunk.
+2025-02-08 10:45:06 DEBUG: Issue #12998 matches keyword: build
+2025-02-08 10:45:06 DEBUG: Added issue #12998 to chunk.
+2025-02-08 10:45:06 DEBUG: Issue #12951 matches keyword: build
+2025-02-08 10:45:06 DEBUG: Added issue #12951 to chunk.
+2025-02-08 10:45:06 DEBUG: Issue #12949 matches keyword: build
+2025-02-08 10:45:06 DEBUG: Added issue #12949 to chunk.
+2025-02-08 10:45:06 INFO: Fetching page 2
+2025-02-08 10:45:06 DEBUG: https://api.github.com:443 "GET /repos/vercel/vercel/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
+2025-02-08 10:45:06 DEBUG: Is final page? False
+2025-02-08 10:45:06 DEBUG: Issue #12877 matches keyword: deployment
+2025-02-08 10:45:06 DEBUG: Added issue #12877 to chunk.
+2025-02-08 10:45:06 DEBUG: Issue #12874 matches keyword: deployment
+2025-02-08 10:45:06 DEBUG: Added issue #12874 to chunk.
+2025-02-08 10:45:06 INFO: Fetching page 3
+2025-02-08 10:45:07 DEBUG: https://api.github.com:443 "GET /repos/vercel/vercel/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
+2025-02-08 10:45:07 DEBUG: Is final page? False
+2025-02-08 10:45:07 DEBUG: Issue #12820 matches keyword: build
+2025-02-08 10:45:07 DEBUG: Added issue #12820 to chunk.
+2025-02-08 10:45:07 DEBUG: Issue #12803 matches keyword: build
+2025-02-08 10:45:07 DEBUG: Added issue #12803 to chunk.
+2025-02-08 10:45:07 DEBUG: Issue #12801 matches keyword: build
+2025-02-08 10:45:07 DEBUG: Added issue #12801 to chunk.
+2025-02-08 10:45:07 DEBUG: Issue #12790 matches keyword: environment
+2025-02-08 10:45:07 DEBUG: Added issue #12790 to chunk.
+2025-02-08 10:45:07 DEBUG: Issue #12765 matches keyword: deployment
+2025-02-08 10:45:07 DEBUG: Added issue #12765 to chunk.
+2025-02-08 10:45:07 DEBUG: Issue #12715 matches keyword: deployment
+2025-02-08 10:45:07 DEBUG: Added issue #12715 to chunk.
+2025-02-08 10:45:07 INFO: Fetching page 4
+2025-02-08 10:45:08 DEBUG: https://api.github.com:443 "GET /repos/vercel/vercel/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
+2025-02-08 10:45:08 DEBUG: Is final page? False
+2025-02-08 10:45:08 DEBUG: Issue #12691 matches keyword: build
+2025-02-08 10:45:08 DEBUG: Added issue #12691 to chunk.
+2025-02-08 10:45:08 DEBUG: Issue #12683 matches keyword: build
+2025-02-08 10:45:08 DEBUG: Added issue #12683 to chunk.
+2025-02-08 10:45:08 DEBUG: Issue #12682 matches keyword: build
+2025-02-08 10:45:08 DEBUG: Added issue #12682 to chunk.
+2025-02-08 10:45:08 DEBUG: Issue #12676 matches keyword: deployment
+2025-02-08 10:45:08 DEBUG: Added issue #12676 to chunk.
+2025-02-08 10:45:08 DEBUG: Issue #12669 matches keyword: build
+2025-02-08 10:45:08 DEBUG: Added issue #12669 to chunk.
+2025-02-08 10:45:08 DEBUG: Issue #12667 matches keyword: build
+2025-02-08 10:45:08 DEBUG: Added issue #12667 to chunk.
+2025-02-08 10:45:08 DEBUG: Issue #12607 matches keyword: build
+2025-02-08 10:45:08 DEBUG: Added issue #12607 to chunk.
+2025-02-08 10:45:08 INFO: Fetching page 5
+2025-02-08 10:45:08 DEBUG: https://api.github.com:443 "GET /repos/vercel/vercel/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
+2025-02-08 10:45:08 DEBUG: Is final page? True
+2025-02-08 10:45:08 DEBUG: Issue #12581 matches keyword: environment
+2025-02-08 10:45:08 DEBUG: Added issue #12581 to chunk.
+2025-02-08 10:45:08 DEBUG: Issue #12563 matches keyword: deployment
+2025-02-08 10:45:08 DEBUG: Added issue #12563 to chunk.
+2025-02-08 10:45:08 INFO: Reached issues older than cutoff on page 5; stopping.
+2025-02-08 10:45:08 DEBUG: Writing chunk of 22 issues to file.
+2025-02-08 10:45:08 DEBUG: Final chunk written to file.
+2025-02-08 10:45:08 INFO: Finished writing output to /Users/mitchmcquoid/Desktop/Issues.json
+2025-02-08 10:45:08 DEBUG: Showing done message box.
+2025-02-08 10:45:11 INFO: GUI terminated successfully. Script finished.
