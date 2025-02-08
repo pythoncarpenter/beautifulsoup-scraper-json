@@ -7,7 +7,10 @@ import tkinter as tk
 import logging
 import uuid
 from dotenv import load_dotenv
+
+# Load environment variables globally from the .env file
 load_dotenv()
+
 # --------------------- Logging Setup ---------------------
 project_root = os.path.dirname(os.path.abspath(__file__))
 log_file = os.path.join(project_root, "scrape.log")
@@ -33,7 +36,7 @@ def deduplicate_items(items, key_func):
             logger.info("Duplicate item skipped: %s", item)
     return list(unique.values())
 
-# --------------------- Udtility: Parse URL ---------------------
+# --------------------- Utility: Parse URL ---------------------
 def parse_repo_url(url):
     """
     Parse a GitHub URL like 'https://github.com/owner/repo/issues'
@@ -75,8 +78,7 @@ def scrape_github_issues(url):
         logger.error(str(e))
         return json.dumps({"error": "Invalid GitHub issues URL"}, indent=2)
 
-    # 2) Load GitHub token from .env
-    load_dotenv()
+    # 2) Get GitHub token from the environment (loaded globally)
     token = os.getenv("GITHUB_TOKEN", "")
     if not token:
         logger.error("GITHUB_TOKEN missing in environment.")
@@ -110,12 +112,12 @@ def scrape_github_issues(url):
             logger.info("No more issues found.")
             break
 
-        # Convert to the same structure the old script returned
+        # Convert to the same structure the old script returned:
         # "number", "title", "url", "created_at", "author"
         for item in batch:
-            # If it's a PR, "pull_request" field will exist. They appear in /issues, but skip if you only want pure issues
+            # If it's a PR, "pull_request" field will exist.
+            # Comment out the following line if you want to include PRs.
             if "pull_request" in item:
-                # comment out if you want to keep PRs in the list
                 # continue
                 pass
             number = str(item.get("number", ""))
@@ -164,8 +166,7 @@ def scrape_fix_pages(url):
         logger.error(str(e))
         return json.dumps({"error": "Invalid GitHub PR URL"}, indent=2)
 
-    # 2) Load GitHub token
-    load_dotenv()
+    # 2) Get GitHub token from the environment (loaded globally)
     token = os.getenv("GITHUB_TOKEN", "")
     if not token:
         logger.error("GITHUB_TOKEN missing in environment.")
@@ -224,7 +225,7 @@ def scrape_fix_pages(url):
     responses = deduplicate_items(
         responses,
         key_func=lambda r: (
-            r.get("author",""), r.get("content",""), r.get("timestamp","")
+            r.get("author", ""), r.get("content", ""), r.get("timestamp", "")
         )
     )
 
@@ -244,7 +245,7 @@ def on_submit():
     
     output_path_input = output_entry.get().strip()
     if not output_path_input:
-        # default paths
+        # Default paths
         if mode == "issues":
             output_path_input = "~/Desktop/issues"
         elif mode == "fixes":
