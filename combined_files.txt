@@ -1,15 +1,75 @@
-Files used in this run: gh_fixes_issues.py run.sh
+Files used in this run: test_scraper.py main.py run.sh
 
+import os
+import json
+import subprocess
+import pytest
+
+@pytest.fixture(scope="session")
+def run_scraper():
+    """
+    Runs the run.sh script one time before tests in this file.
+    Assumes run.sh writes a JSON file to ~/Desktop/issues.json 
+    (or your chosen path).
+    """
+    # 1. Set up the environment or arguments as needed:
+    #    For example, you might set an environment variable if your run.sh uses it:
+    #    os.environ["SCRAPER_URL"] = "https://github.com/vercel/nft/issues"
+
+    # 2. Run the script. This should create or update ~/Desktop/issues.json.
+    #    If your script depends on being in a certain directory, cd into it first.
+    #    Use shell=True only if strictly necessary:
+    subprocess.run(["./run.sh"], check=True)
+
+    # 3. Return the path to the JSON output so we can read it in subsequent tests.
+    #    Adjust to match your script's actual output path (e.g., ~/Desktop/issues.json).
+    return os.path.expanduser("~/Desktop/issues.json")
+
+def test_scraper_output_exists(run_scraper):
+    """
+    Test that the JSON output file was actually created.
+    """
+    output_path = run_scraper
+    assert os.path.isfile(output_path), f"Output file not found at {output_path}"
+
+def test_multi_page_capture(run_scraper):
+    """
+    Test that the scraper captured multiple pages of issues if there's a 'Next' link.
+    We check if the total number of issues is above a typical single-page count (e.g. 25).
+    """
+    output_path = run_scraper
+
+    with open(output_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    # 'data' should be a list of issues if run.sh is in 'issues' mode.
+    # If it's a dict with {"responses": ...}, adapt accordingly.
+    assert isinstance(data, list), "Expected a list of issues in the JSON output."
+
+    issue_count = len(data)
+    print(f"Found {issue_count} issues.")
+
+    # A typical GitHub issues page might show 25 issues by default.
+    # If your repo definitely has more than 25, we expect the scraper 
+    # to follow the 'Next' link and collect more.
+    assert issue_count > 25, "It appears we did not capture multiple pages."
+
+    # Optionally, you could check for a specific known item or number:
+    # assert any(issue["number"] == "999" for issue in data), "Item from page 2 missing."
 #!/usr/bin/env python3
 import os
+import re
 import requests
-from bs4 import BeautifulSoup
 import json
 import tkinter as tk
 import logging
 import uuid
+from dotenv import load_dotenv
 
-# Setup logging to a file in the project root.
+# Load environment variables globally from the .env file
+load_dotenv()
+
+# --------------------- Logging Setup ---------------------
 project_root = os.path.dirname(os.path.abspath(__file__))
 log_file = os.path.join(project_root, "scrape.log")
 logging.basicConfig(
@@ -20,6 +80,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger()
 
+# --------------------- Utility: Dedup ---------------------
 def deduplicate_items(items, key_func):
     """
     Deduplicates a list of dictionary items using a key function.
@@ -33,161 +94,216 @@ def deduplicate_items(items, key_func):
             logger.info("Duplicate item skipped: %s", item)
     return list(unique.values())
 
+# --------------------- Utility: Parse URL ---------------------
+def parse_repo_url(url):
+    """
+    Parse a GitHub URL like 'https://github.com/owner/repo/issues'
+    and return (owner, repo).
+    """
+    # Remove trailing slash, split on "/"
+    parts = url.strip().strip("/").split("/")
+    # Typically: [ 'https:', '', 'github.com', 'owner', 'repo', 'issues' ]
+    if len(parts) < 5 or parts[-1] not in ("issues", "pulls", "pull"):
+        raise ValueError(f"Not a valid GitHub issues/pulls URL: {url}")
+    owner = parts[-3]  # e.g. "owner"
+    repo = parts[-2]   # e.g. "repo"
+    return (owner, repo)
+
+def parse_pull_number(url):
+    """
+    If the user selected 'Fix Pages', we parse the PR number from
+    something like 'https://github.com/owner/repo/pull/123'.
+    Returns an integer or None if not found.
+    """
+    match = re.search(r"/pull/(\d+)", url)
+    if match:
+        return int(match.group(1))
+    # Alternatively, some older GitHub URLs might have /pulls/ but you can adjust as needed.
+    return None
+
+# --------------------- Issues via GitHub REST API ---------------------
 def scrape_github_issues(url):
     """
-    Scrapes a GitHub issues page and extracts details for each issue.
-    Returns a JSON-formatted string.
+    Fetch all issues for the given repository using the REST API.
+    Return a JSON string (list of issue dicts).
     """
-    logger.info("Starting scrape_github_issues for URL: %s", url)
-    headers = {
-        'User-Agent': (
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-            'AppleWebKit/537.36 (KHTML, like Gecko) '
-            'Chrome/89.0.4389.90 Safari/537.36'
-        )
-    }
+    logger.info("Starting scrape_github_issues (REST API) for URL: %s", url)
+
+    # 1) Parse the (owner, repo) from the URL.
     try:
-        response = requests.get(url, headers=headers)
-        logger.info("Received response with status code: %d", response.status_code)
-    except Exception as e:
-        logger.error("Exception during request: %s", e)
-        return json.dumps({"error": "Exception during request"}, indent=2)
+        owner, repo = parse_repo_url(url)
+    except ValueError as e:
+        logger.error(str(e))
+        return json.dumps({"error": "Invalid GitHub issues URL"}, indent=2)
 
-    if response.status_code != 200:
-        logger.error("Failed to fetch page, status code: %d", response.status_code)
-        return json.dumps({
-            "error": "Failed to fetch page",
-            "status_code": response.status_code
-        }, indent=2)
-    
-    soup = BeautifulSoup(response.text, 'html.parser')
+    # 2) Get GitHub token from the environment (loaded globally)
+    token = os.getenv("GITHUB_TOKEN", "")
+    if not token:
+        logger.error("GITHUB_TOKEN missing in environment.")
+        return json.dumps({"error": "Missing GITHUB_TOKEN"}, indent=2)
+
+    # 3) Paginate through issues
     issues = []
-    
-    # Find all <li> elements representing issue rows.
-    issue_rows = soup.find_all("li", class_=lambda x: x and "ListItem-module__listItem" in x)
-    logger.info("Found %d issue rows", len(issue_rows))
-    
-    for row in issue_rows:
-        title_elem = row.find("a", class_=lambda x: x and "TitleHeader-module__inline" in x)
-        if not title_elem:
-            continue
-        title = title_elem.get_text(strip=True)
-        href = title_elem.get("href", "")
-        full_url = "https://github.com" + href if href.startswith("/") else href
+    per_page = 100
+    page = 1
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {token}"
+    }
+    while True:
+        logger.info("Requesting page=%d of issues for %s/%s", page, owner, repo)
+        resp = requests.get(
+            f"https://api.github.com/repos/{owner}/{repo}/issues",
+            headers=headers,
+            params={
+                "state": "all",   # or "open", "closed"
+                "page": page,
+                "per_page": per_page
+            }
+        )
+        if resp.status_code != 200:
+            logger.error("Failed to fetch issues: %d %s", resp.status_code, resp.text)
+            break
 
-        num_elem = row.find("span", class_=lambda x: x and "issue-item-module__defaultNumberDescription" in x)
-        number = ""
-        if num_elem:
-            raw_number = num_elem.get_text(strip=True)
-            number = ''.join(filter(str.isdigit, raw_number))
-        else:
-            logger.debug("No number element found for issue with title: %s", title)
+        batch = resp.json()
+        if not isinstance(batch, list) or len(batch) == 0:
+            logger.info("No more issues found.")
+            break
 
-        rel_time_elem = row.find("relative-time")
-        created_at = rel_time_elem.get("datetime", "") if rel_time_elem else ""
-        
-        author_elem = row.find("a", class_=lambda x: x and "issue-item-module__authorCreatedLink" in x)
-        author = author_elem.get_text(strip=True) if author_elem else ""
-        
-        if title and number:
-            issues.append({
-                "number": number,
-                "title": title,
-                "url": full_url,
-                "created_at": created_at,
-                "author": author
-            })
-        else:
-            logger.warning("Skipping issue due to missing title or number: title='%s', number='%s'", title, number)
-    
-    # Deduplicate based on (number, title)
-    issues = deduplicate_items(issues, key_func=lambda item: (item.get("number", ""), item.get("title", "")))
-    
+        # Convert to the same structure the old script returned:
+        # "number", "title", "url", "created_at", "author"
+        for item in batch:
+            # If it's a PR, "pull_request" field will exist.
+            # Comment out the following line if you want to include PRs.
+            if "pull_request" in item:
+                # continue
+                pass
+            number = str(item.get("number", ""))
+            title = item.get("title", "")
+            html_url = item.get("html_url", "")
+            created_at = item.get("created_at", "")
+            author_info = item.get("user", {}) or {}
+            author = author_info.get("login", "")
+
+            if title and number:
+                issues.append({
+                    "number": number,
+                    "title": title,
+                    "url": html_url,
+                    "created_at": created_at,
+                    "author": author
+                })
+
+        if len(batch) < per_page:
+            logger.info("Last page reached.")
+            break
+
+        page += 1
+
+    # 4) Deduplicate (by (number, title))
+    issues = deduplicate_items(issues, key_func=lambda i: (i.get("number", ""), i.get("title", "")))
+
     logger.info("Finished scraping issues. Total unique issues: %d", len(issues))
     return json.dumps(issues, indent=2)
 
+# --------------------- Fix Pages (Pull Requests) via GitHub REST API ---------------------
 def scrape_fix_pages(url):
     """
-    Scrapes a GitHub fix page (typically a pull request page) and extracts conversation responses.
-    Each response object has: id, type, author, timestamp, and content.
-    Returns a JSON-formatted string.
+    Fetch conversation comments for a Pull Request using the REST API.
+    Return a JSON string with "responses": [...comments...].
     """
-    logger.info("Starting scrape_fix_pages for URL: %s", url)
-    headers = {
-        'User-Agent': (
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-            'AppleWebKit/537.36 (KHTML, like Gecko) '
-            'Chrome/89.0.4389.90 Safari/537.36'
-        )
-    }
-    try:
-        response = requests.get(url, headers=headers)
-        logger.info("Received response with status code: %d", response.status_code)
-    except Exception as e:
-        logger.error("Exception during request in scrape_fix_pages: %s", e)
-        return json.dumps({"error": "Exception during request"}, indent=2)
+    logger.info("Starting scrape_fix_pages (REST API) for URL: %s", url)
 
-    if response.status_code != 200:
-        logger.error("Failed to fetch fix page, status code: %d", response.status_code)
-        return json.dumps({
-            "error": "Failed to fetch page",
-            "status_code": response.status_code
-        }, indent=2)
-    
-    soup = BeautifulSoup(response.text, 'html.parser')
+    # 1) Parse (owner, repo) and PR number
+    try:
+        owner, repo = parse_repo_url(url)
+        pr_number = parse_pull_number(url)
+        if not pr_number:
+            raise ValueError("Could not extract PR number from URL.")
+    except ValueError as e:
+        logger.error(str(e))
+        return json.dumps({"error": "Invalid GitHub PR URL"}, indent=2)
+
+    # 2) Get GitHub token from the environment (loaded globally)
+    token = os.getenv("GITHUB_TOKEN", "")
+    if not token:
+        logger.error("GITHUB_TOKEN missing in environment.")
+        return json.dumps({"error": "Missing GITHUB_TOKEN"}, indent=2)
+
+    # 3) Retrieve comments from /repos/{owner}/{repo}/issues/{pr_number}/comments
+    #    If you also need code-review comments, do /pulls/{pr_number}/comments
     responses = []
-    
-    # Look for conversation items in the pull request/fix page.
-    conversation_items = soup.find_all("div", class_=lambda x: x and ("timeline-comment" in x or "js-comment-container" in x))
-    logger.info("Found %d conversation items", len(conversation_items))
-    
-    for item in conversation_items:
-        author_elem = item.find("a", class_=lambda x: x and "author" in x)
-        author = author_elem.get_text(strip=True) if author_elem else "Unknown"
-        
-        time_elem = item.find("relative-time")
-        timestamp = time_elem.get("datetime", "") if time_elem else ""
-        
-        content_elem = item.find("td", class_=lambda x: x and "comment-body" in x)
-        if not content_elem:
-            content_elem = item.find("div", class_=lambda x: x and "edit-comment-hide" in x)
-        content = content_elem.get_text(strip=True) if content_elem else ""
-        
-        response_type = "comment"  # Default type for now.
-        response_id = str(uuid.uuid4())
-        
-        if content:
-            responses.append({
-                "id": response_id,
-                "type": response_type,
-                "author": author,
-                "timestamp": timestamp,
-                "content": content
-            })
-        else:
-            logger.debug("Skipping a fix item due to missing content.")
-    
-    # Deduplicate responses based on (author, content, timestamp) or (author, content) if timestamp is empty.
+    page = 1
+    per_page = 100
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {token}"
+    }
+    while True:
+        logger.info("Requesting page=%d of PR comments for %s/%s PR#%d", page, owner, repo, pr_number)
+        resp = requests.get(
+            f"https://api.github.com/repos/{owner}/{repo}/issues/{pr_number}/comments",
+            headers=headers,
+            params={
+                "page": page,
+                "per_page": per_page
+            }
+        )
+        if resp.status_code != 200:
+            logger.error("Failed to fetch PR comments: %d %s", resp.status_code, resp.text)
+            break
+
+        batch = resp.json()
+        if not isinstance(batch, list) or len(batch) == 0:
+            break
+
+        for item in batch:
+            author_info = item.get("user", {}) or {}
+            author = author_info.get("login", "Unknown")
+
+            timestamp = item.get("created_at", "")
+            content = item.get("body", "")
+            response_id = str(uuid.uuid4())
+            response_type = "comment"  # for now
+
+            if content:
+                responses.append({
+                    "id": response_id,
+                    "type": response_type,
+                    "author": author,
+                    "timestamp": timestamp,
+                    "content": content
+                })
+
+        if len(batch) < per_page:
+            break
+        page += 1
+
+    # 4) Deduplicate based on (author, content, timestamp)
     responses = deduplicate_items(
         responses,
-        key_func=lambda item: (item.get("author", ""), item.get("content", ""), item.get("timestamp", "")) if item.get("timestamp") else (item.get("author", ""), item.get("content", ""))
+        key_func=lambda r: (
+            r.get("author", ""), r.get("content", ""), r.get("timestamp", "")
+        )
     )
-    
+
     logger.info("Finished scraping fixes. Total unique responses: %d", len(responses))
     return json.dumps({"responses": responses}, indent=2)
 
+# --------------------- on_submit (GUI Handler) ---------------------
 def on_submit():
     logger.info("Submit button pressed.")
     url = url_text.get("1.0", tk.END).strip()
     if not url:
         logger.info("No URL provided; defaulting to issues page.")
-        url = "https://github.com/vercel/nft/issues"
+        url = "https://github.com/neovim/neovim/issues"
     
     mode = mode_var.get()
     logger.info("Mode selected: %s", mode)
     
     output_path_input = output_entry.get().strip()
     if not output_path_input:
+        # Default paths
         if mode == "issues":
             output_path_input = "~/Desktop/issues"
         elif mode == "fixes":
@@ -211,7 +327,7 @@ def on_submit():
     
     try:
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        with open(output_path, "w") as f:
+        with open(output_path, "w", encoding="utf-8") as f:
             f.write(output)
         logger.info("Results successfully written to %s", output_path)
     except Exception as e:
@@ -219,30 +335,32 @@ def on_submit():
 
 # --------------------- GUI Setup ---------------------
 root = tk.Tk()
-root.title("GitHub Issues/Fix Pages Scraper")
+root.title("GitHub Issues/Fix Pages Scraper (REST API)")
 
-url_label = tk.Label(root, text="Input page URL from GitHub:")
+url_label = tk.Label(root, text="Input GitHub Issues/Pull URL:")
 url_label.pack(pady=(10, 0))
+
 url_text = tk.Text(root, wrap=tk.WORD, width=50, height=4)
-url_text.insert(tk.END, "https://github.com/vercel/nft/issues")
+url_text.insert(tk.END, "https://github.com/neovim/neovim/issues")
 url_text.pack(padx=10, pady=10)
 
 output_label = tk.Label(root, text="Specify output file path (e.g., ~/Desktop/filename):")
 output_label.pack(pady=(10, 0))
+
 output_entry = tk.Entry(root, width=50)
-# Set the default based on the default mode ("issues").
 output_entry.insert(tk.END, "~/Desktop/issues")
 output_entry.pack(padx=10, pady=10)
 
 mode_var = tk.StringVar(value="issues")
 mode_frame = tk.Frame(root)
 mode_frame.pack(pady=(10, 0))
+
 radio_issues = tk.Radiobutton(mode_frame, text="Issue Pages", variable=mode_var, value="issues")
 radio_issues.pack(side=tk.LEFT, padx=10)
+
 radio_fixes = tk.Radiobutton(mode_frame, text="Fix Pages", variable=mode_var, value="fixes")
 radio_fixes.pack(side=tk.LEFT, padx=10)
 
-# Update output file path based on radio button selection.
 def update_output_default(*args):
     mode = mode_var.get()
     if mode == "issues":
@@ -254,7 +372,6 @@ def update_output_default(*args):
     output_entry.delete(0, tk.END)
     output_entry.insert(tk.END, default_path)
 
-# Use trace_add for newer Tkinter versions.
 mode_var.trace_add("write", update_output_default)
 
 submit_button = tk.Button(root, text="Submit", command=on_submit)
@@ -262,8 +379,8 @@ submit_button.pack(pady=(10, 10))
 
 root.mainloop()
 #!/bin/bash
-# run.sh - Comprehensive one-click setup with recursive retry, network timeout handling,
-# and graceful error handling for first-time execution.
+# run.sh - One-click setup with pipenv, strict error handling, and a native Tkinter GUI on macOS.
+# This version removes XQuartz references so that Tkinter uses the native Cocoa/Aqua framework.
 
 # --- Enable Strict Error Handling ---
 set -euo pipefail
@@ -288,17 +405,6 @@ retry_pipenv_install() {
     return 1
 }
 
-# --- Function: Check and wait for XQuartz on macOS (recursive) ---
-check_xquartz_recursive() {
-    if pgrep -x "XQuartz" > /dev/null; then
-        echo "XQuartz is running."
-    else
-        echo "XQuartz not running. Retrying in 2 seconds..."
-        sleep 2
-        check_xquartz_recursive  # Recursive call until XQuartz is detected.
-    fi
-}
-
 # --- Function: Setup environment and run scraper (recursive retry) ---
 setup_and_run() {
     local attempt="${1:-1}"
@@ -307,7 +413,7 @@ setup_and_run() {
     echo "Setup attempt $attempt of $max_attempts..."
 
     # Step 0: Ensure key files have execute permissions.
-    chmod +x run.sh gh_fixes_isses.py setup_env.sh || echo "Warning: Could not update permissions for some files."
+    chmod +x run.sh main.py setup_env.sh || echo "Warning: Could not update permissions for some files."
 
     # Step 1: Check for pipenv.
     if ! command -v pipenv >/dev/null 2>&1; then
@@ -348,48 +454,27 @@ setup_and_run() {
         exit 1
     fi
 
-    # Step 5: Verify required packages are installed.
-    required_packages=("pandas" "numpy" "statsmodels" "matplotlib" "openai")
-    pipenv run pip list > /tmp/installed_packages.txt
-    for pkg in "${required_packages[@]}"; do
-        if ! grep -qi "$pkg" /tmp/installed_packages.txt; then
-            echo "Error: Package '$pkg' is not installed in the virtual environment." >&2
-            rm /tmp/installed_packages.txt
-            exit 1
-        fi
-    done
-    rm /tmp/installed_packages.txt
+    # Step 5: (Optional) Package checks removed or simplified. Adjust if needed.
     echo "Environment checks passed."
 
-    # Step 6: Setup system-specific GUI engine.
+    # Step 6: Native macOS (Cocoa) Tkinter requires NO XQuartz. Remove or comment out all XQuartz logic.
     os_type=$(uname)
     if [[ "$os_type" == "Darwin" ]]; then
-        # On macOS, ensure XQuartz is running.
-        if ! pgrep -x "XQuartz" > /dev/null; then
-            echo "XQuartz is not running. Launching XQuartz..."
-            open -a XQuartz || { echo "Error: Failed to launch XQuartz. Aborting."; exit 1; }
-        fi
-        # Use recursive function to wait for XQuartz.
-        check_xquartz_recursive
-        # Set DISPLAY if not already set.
-        if [ -z "${DISPLAY:-}" ]; then
-            echo "DISPLAY variable not set. Setting to :0.0 for GUI support."
-            export DISPLAY=:0.0
-        fi
+        echo "Running on macOS. Tkinter will use native Cocoa (Aqua) by default."
     elif [[ "$os_type" == "Linux" ]]; then
         if [ -z "${DISPLAY:-}" ]; then
             echo "Warning: DISPLAY is not set. Ensure an X server is running for GUI support." >&2
         fi
     elif [[ "$os_type" == MINGW* || "$os_type" == CYGWIN* ]]; then
-        echo "Windows detected. Please ensure you have a compatible GUI engine available." >&2
+        echo "Windows detected. Ensure a compatible GUI is available." >&2
     fi
 
-    # Step 7: Run the scraper application.
+    # Step 7: Run the scraper application (main.py).
     echo "Starting the scraper application..."
     if [ -z "${VIRTUAL_ENV:-}" ]; then
-        pipenv run python gh_fixes_isses.py || { echo "Error: Running gh_fixes_isses.py failed."; exit 1; }
+        pipenv run python main.py || { echo "Error: Running main.py failed."; exit 1; }
     else
-        python gh_fixes_isses.py || { echo "Error: Running gh_fixes_isses.py failed."; exit 1; }
+        python main.py || { echo "Error: Running main.py failed."; exit 1; }
     fi
 
     echo "Scraper application completed successfully."
@@ -398,4 +483,3 @@ setup_and_run() {
 
 # --- Kick Off the Setup Process ---
 setup_and_run 1
-
