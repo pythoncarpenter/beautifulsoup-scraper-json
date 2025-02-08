@@ -114,3 +114,63 @@
 2025-02-01 18:09:55 INFO: Duplicate item skipped: {'id': 'b90abd5b-f152-43ed-807d-ec0f30613fe5', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
 2025-02-01 18:09:55 INFO: Finished scraping fixes. Total unique responses: 4
 2025-02-01 18:09:55 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes.json
+2025-02-07 21:07:34 INFO: Submit button pressed.
+2025-02-07 21:07:34 INFO: Mode selected: issues
+2025-02-07 21:07:34 INFO: Starting scrape_github_issues for URL: https://github.com/vercel/nft/issues
+2025-02-07 21:07:34 DEBUG: Starting new HTTPS connection (1): github.com:443
+2025-02-07 21:07:34 DEBUG: https://github.com:443 "GET /vercel/nft/issues HTTP/1.1" 200 None
+2025-02-07 21:07:34 INFO: Received response with status code: 200
+2025-02-07 21:07:34 INFO: Found 12 issue rows
+2025-02-07 21:07:34 INFO: Finished scraping issues. Total unique issues: 12
+2025-02-07 21:07:34 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-07 21:12:13 INFO: Submit button pressed.
+2025-02-07 21:12:13 INFO: Mode selected: fixes
+2025-02-07 21:12:13 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
+2025-02-07 21:12:13 DEBUG: Starting new HTTPS connection (1): github.com:443
+2025-02-07 21:12:14 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
+2025-02-07 21:12:14 INFO: Received response with status code: 200
+2025-02-07 21:12:14 INFO: Found 16 conversation items
+2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
+2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
+2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
+2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
+2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
+2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
+2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
+2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
+2025-02-07 21:12:14 INFO: Duplicate item skipped: {'id': 'cef636d1-97aa-4b24-ad12-0eff13c67aa8', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
+2025-02-07 21:12:14 INFO: Duplicate item skipped: {'id': '9b758170-f1ad-4fb8-b292-6c39e56e9515', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
+2025-02-07 21:12:14 INFO: Duplicate item skipped: {'id': 'f8a06f4a-4960-4c42-9388-33282c6f3158', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
+2025-02-07 21:12:14 INFO: Duplicate item skipped: {'id': '07cff795-9910-4636-a5d7-f078f37a7dca', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
+2025-02-07 21:12:14 INFO: Finished scraping fixes. Total unique responses: 4
+2025-02-07 21:12:14 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes.json
+2025-02-07 21:47:22 INFO: Submit button pressed.
+2025-02-07 21:47:22 INFO: Mode selected: issues
+2025-02-07 21:47:22 INFO: Starting scrape_all_github_issues for URL: https://github.com/vercel/nft/issues
+2025-02-07 21:47:22 INFO: Scraping single page of issues: https://github.com/vercel/nft/issues
+2025-02-07 21:47:22 DEBUG: Starting new HTTPS connection (1): github.com:443
+2025-02-07 21:47:22 DEBUG: https://github.com:443 "GET /vercel/nft/issues HTTP/1.1" 200 None
+2025-02-07 21:47:22 INFO: Received response with status code: 200
+2025-02-07 21:47:22 INFO: Found 12 issue rows on this page
+2025-02-07 21:47:22 INFO: Finished scraping all pages. Total unique issues: 12
+2025-02-07 21:47:22 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-07 21:56:20 INFO: Submit button pressed.
+2025-02-07 21:56:20 INFO: Mode selected: issues
+2025-02-07 21:56:20 INFO: Starting scrape_all_github_issues for URL: https://github.com/vercel/vercel/issues
+2025-02-07 21:56:20 INFO: Scraping single page of issues: https://github.com/vercel/vercel/issues
+2025-02-07 21:56:20 DEBUG: Starting new HTTPS connection (1): github.com:443
+2025-02-07 21:56:21 DEBUG: https://github.com:443 "GET /vercel/vercel/issues HTTP/1.1" 200 None
+2025-02-07 21:56:21 INFO: Received response with status code: 200
+2025-02-07 21:56:21 INFO: Found 12 issue rows on this page
+2025-02-07 21:56:21 INFO: Finished scraping all pages. Total unique issues: 12
+2025-02-07 21:56:21 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-07 22:00:21 INFO: Submit button pressed.
+2025-02-07 22:00:21 INFO: Mode selected: issues
+2025-02-07 22:00:21 INFO: Starting scrape_all_github_issues for URL: https://github.com/neovim/neovim/issues
+2025-02-07 22:00:21 INFO: Scraping single page of issues: https://github.com/neovim/neovim/issues
+2025-02-07 22:00:21 DEBUG: Starting new HTTPS connection (1): github.com:443
+2025-02-07 22:00:22 DEBUG: https://github.com:443 "GET /neovim/neovim/issues HTTP/1.1" 200 None
+2025-02-07 22:00:22 INFO: Received response with status code: 200
+2025-02-07 22:00:22 INFO: Found 12 issue rows on this page
+2025-02-07 22:00:22 INFO: Finished scraping all pages. Total unique issues: 12
+2025-02-07 22:00:22 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/issues.json

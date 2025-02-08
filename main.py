@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 import os
+import re
 import requests
-from bs4 import BeautifulSoup
+from dotenv import load_dotenv
 import json
 import tkinter as tk
 import logging
 import uuid
 
-# Setup logging to a file in the project root.
+# --------------------- Logging Setup ---------------------
 project_root = os.path.dirname(os.path.abspath(__file__))
 log_file = os.path.join(project_root, "scrape.log")
 logging.basicConfig(
@@ -18,6 +19,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger()
 
+# --------------------- Utility: Dedup ---------------------
 def deduplicate_items(items, key_func):
     """
     Deduplicates a list of dictionary items using a key function.
@@ -31,168 +33,218 @@ def deduplicate_items(items, key_func):
             logger.info("Duplicate item skipped: %s", item)
     return list(unique.values())
 
+# --------------------- Utility: Parse URL ---------------------
+def parse_repo_url(url):
+    """
+    Parse a GitHub URL like 'https://github.com/owner/repo/issues'
+    and return (owner, repo).
+    """
+    # Remove trailing slash, split on "/"
+    parts = url.strip().strip("/").split("/")
+    # Typically: [ 'https:', '', 'github.com', 'owner', 'repo', 'issues' ]
+    if len(parts) < 5 or parts[-1] not in ("issues", "pulls", "pull"):
+        raise ValueError(f"Not a valid GitHub issues/pulls URL: {url}")
+    owner = parts[-3]  # e.g. "owner"
+    repo = parts[-2]   # e.g. "repo"
+    return (owner, repo)
+
+def parse_pull_number(url):
+    """
+    If the user selected 'Fix Pages', we parse the PR number from
+    something like 'https://github.com/owner/repo/pull/123'.
+    Returns an integer or None if not found.
+    """
+    match = re.search(r"/pull/(\d+)", url)
+    if match:
+        return int(match.group(1))
+    # Alternatively, some older GitHub URLs might have /pulls/ but you can adjust as needed.
+    return None
+
+# --------------------- Issues via GitHub REST API ---------------------
 def scrape_github_issues(url):
     """
-    Scrapes a GitHub issues page and extracts details for each issue.
-    Returns a JSON-formatted string.
+    Fetch all issues for the given repository using the REST API.
+    Return a JSON string (list of issue dicts).
     """
-    logger.info("Starting scrape_github_issues for URL: %s", url)
-    headers = {
-        'User-Agent': (
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-            'AppleWebKit/537.36 (KHTML, like Gecko) '
-            'Chrome/89.0.4389.90 Safari/537.36'
-        )
-    }
+    logger.info("Starting scrape_github_issues (REST API) for URL: %s", url)
+
+    # 1) Parse the (owner, repo) from the URL.
     try:
-        response = requests.get(url, headers=headers)
-        logger.info("Received response with status code: %d", response.status_code)
-    except Exception as e:
-        logger.error("Exception during request: %s", e)
-        return json.dumps({"error": "Exception during request"}, indent=2)
+        owner, repo = parse_repo_url(url)
+    except ValueError as e:
+        logger.error(str(e))
+        return json.dumps({"error": "Invalid GitHub issues URL"}, indent=2)
 
-    if response.status_code != 200:
-        logger.error("Failed to fetch page, status code: %d", response.status_code)
-        return json.dumps({
-            "error": "Failed to fetch page",
-            "status_code": response.status_code
-        }, indent=2)
-    
-    soup = BeautifulSoup(response.text, 'html.parser')
+    # 2) Load GitHub token from .env
+    load_dotenv()
+    token = os.getenv("GITHUB_TOKEN", "")
+    if not token:
+        logger.error("GITHUB_TOKEN missing in environment.")
+        return json.dumps({"error": "Missing GITHUB_TOKEN"}, indent=2)
+
+    # 3) Paginate through issues
     issues = []
-    
-    # Find all <li> elements representing issue rows.
-    issue_rows = soup.find_all("li", class_=lambda x: x and "ListItem-module__listItem" in x)
-    logger.info("Found %d issue rows", len(issue_rows))
-    
-    for row in issue_rows:
-        title_elem = row.find("a", class_=lambda x: x and "TitleHeader-module__inline" in x)
-        if not title_elem:
-            continue
-        title = title_elem.get_text(strip=True)
-        href = title_elem.get("href", "")
-        full_url = "https://github.com" + href if href.startswith("/") else href
+    per_page = 100
+    page = 1
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {token}"
+    }
+    while True:
+        logger.info("Requesting page=%d of issues for %s/%s", page, owner, repo)
+        resp = requests.get(
+            f"https://api.github.com/repos/{owner}/{repo}/issues",
+            headers=headers,
+            params={
+                "state": "all",   # or "open", "closed"
+                "page": page,
+                "per_page": per_page
+            }
+        )
+        if resp.status_code != 200:
+            logger.error("Failed to fetch issues: %d %s", resp.status_code, resp.text)
+            break
 
-        num_elem = row.find("span", class_=lambda x: x and "issue-item-module__defaultNumberDescription" in x)
-        number = ""
-        if num_elem:
-            raw_number = num_elem.get_text(strip=True)
-            number = ''.join(filter(str.isdigit, raw_number))
-        else:
-            logger.debug("No number element found for issue with title: %s", title)
+        batch = resp.json()
+        if not isinstance(batch, list) or len(batch) == 0:
+            logger.info("No more issues found.")
+            break
 
-        rel_time_elem = row.find("relative-time")
-        created_at = rel_time_elem.get("datetime", "") if rel_time_elem else ""
-        
-        author_elem = row.find("a", class_=lambda x: x and "issue-item-module__authorCreatedLink" in x)
-        author = author_elem.get_text(strip=True) if author_elem else ""
-        
-        if title and number:
-            issues.append({
-                "number": number,
-                "title": title,
-                "url": full_url,
-                "created_at": created_at,
-                "author": author
-            })
-        else:
-            logger.warning("Skipping issue due to missing title or number: title='%s', number='%s'", title, number)
-    
-    # Deduplicate based on (number, title)
-    issues = deduplicate_items(issues, key_func=lambda item: (item.get("number", ""), item.get("title", "")))
-    
+        # Convert to the same structure the old script returned
+        # "number", "title", "url", "created_at", "author"
+        for item in batch:
+            # If it's a PR, "pull_request" field will exist. They appear in /issues, but skip if you only want pure issues
+            if "pull_request" in item:
+                # comment out if you want to keep PRs in the list
+                # continue
+                pass
+            number = str(item.get("number", ""))
+            title = item.get("title", "")
+            html_url = item.get("html_url", "")
+            created_at = item.get("created_at", "")
+            author_info = item.get("user", {}) or {}
+            author = author_info.get("login", "")
+
+            if title and number:
+                issues.append({
+                    "number": number,
+                    "title": title,
+                    "url": html_url,
+                    "created_at": created_at,
+                    "author": author
+                })
+
+        if len(batch) < per_page:
+            logger.info("Last page reached.")
+            break
+
+        page += 1
+
+    # 4) Deduplicate (by (number, title))
+    issues = deduplicate_items(issues, key_func=lambda i: (i.get("number", ""), i.get("title", "")))
+
     logger.info("Finished scraping issues. Total unique issues: %d", len(issues))
     return json.dumps(issues, indent=2)
 
+# --------------------- Fix Pages (Pull Requests) via GitHub REST API ---------------------
 def scrape_fix_pages(url):
     """
-    Scrapes a GitHub fix page (typically a pull request page) and extracts conversation responses.
-    Each response object has: id, type, author, timestamp, and content.
-    Returns a JSON-formatted string.
+    Fetch conversation comments for a Pull Request using the REST API.
+    Return a JSON string with "responses": [...comments...].
     """
-    logger.info("Starting scrape_fix_pages for URL: %s", url)
-    headers = {
-        'User-Agent': (
-            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
-            'AppleWebKit/537.36 (KHTML, like Gecko) '
-            'Chrome/89.0.4389.90 Safari/537.36'
-        )
-    }
-    try:
-        response = requests.get(url, headers=headers)
-        logger.info("Received response with status code: %d", response.status_code)
-    except Exception as e:
-        logger.error("Exception during request in scrape_fix_pages: %s", e)
-        return json.dumps({"error": "Exception during request"}, indent=2)
+    logger.info("Starting scrape_fix_pages (REST API) for URL: %s", url)
 
-    if response.status_code != 200:
-        logger.error("Failed to fetch fix page, status code: %d", response.status_code)
-        return json.dumps({
-            "error": "Failed to fetch page",
-            "status_code": response.status_code
-        }, indent=2)
-    
-    soup = BeautifulSoup(response.text, 'html.parser')
+    # 1) Parse (owner, repo) and PR number
+    try:
+        owner, repo = parse_repo_url(url)
+        pr_number = parse_pull_number(url)
+        if not pr_number:
+            raise ValueError("Could not extract PR number from URL.")
+    except ValueError as e:
+        logger.error(str(e))
+        return json.dumps({"error": "Invalid GitHub PR URL"}, indent=2)
+
+    # 2) Load GitHub token
+    load_dotenv()
+    token = os.getenv("GITHUB_TOKEN", "")
+    if not token:
+        logger.error("GITHUB_TOKEN missing in environment.")
+        return json.dumps({"error": "Missing GITHUB_TOKEN"}, indent=2)
+
+    # 3) Retrieve comments from /repos/{owner}/{repo}/issues/{pr_number}/comments
+    #    If you also need code-review comments, do /pulls/{pr_number}/comments
     responses = []
-    
-    # Look for conversation items in the pull request/fix page.
-    conversation_items = soup.find_all("div", class_=lambda x: x and ("timeline-comment" in x or "js-comment-container" in x))
-    logger.info("Found %d conversation items", len(conversation_items))
-    
-    for item in conversation_items:
-        author_elem = item.find("a", class_=lambda x: x and "author" in x)
-        author = author_elem.get_text(strip=True) if author_elem else "Unknown"
-        
-        time_elem = item.find("relative-time")
-        timestamp = time_elem.get("datetime", "") if time_elem else ""
-        
-        content_elem = item.find("td", class_=lambda x: x and "comment-body" in x)
-        if not content_elem:
-            content_elem = item.find("div", class_=lambda x: x and "edit-comment-hide" in x)
-        content = content_elem.get_text(strip=True) if content_elem else ""
-        
-        response_type = "comment"  # Default type for now.
-        response_id = str(uuid.uuid4())
-        
-        if content:
-            responses.append({
-                "id": response_id,
-                "type": response_type,
-                "author": author,
-                "timestamp": timestamp,
-                "content": content
-            })
-        else:
-            logger.debug("Skipping a fix item due to missing content.")
-    
-    # Deduplicate responses based on (author, content, timestamp) or (author, content) if timestamp is empty.
+    page = 1
+    per_page = 100
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "Authorization": f"Bearer {token}"
+    }
+    while True:
+        logger.info("Requesting page=%d of PR comments for %s/%s PR#%d", page, owner, repo, pr_number)
+        resp = requests.get(
+            f"https://api.github.com/repos/{owner}/{repo}/issues/{pr_number}/comments",
+            headers=headers,
+            params={
+                "page": page,
+                "per_page": per_page
+            }
+        )
+        if resp.status_code != 200:
+            logger.error("Failed to fetch PR comments: %d %s", resp.status_code, resp.text)
+            break
+
+        batch = resp.json()
+        if not isinstance(batch, list) or len(batch) == 0:
+            break
+
+        for item in batch:
+            author_info = item.get("user", {}) or {}
+            author = author_info.get("login", "Unknown")
+
+            timestamp = item.get("created_at", "")
+            content = item.get("body", "")
+            response_id = str(uuid.uuid4())
+            response_type = "comment"  # for now
+
+            if content:
+                responses.append({
+                    "id": response_id,
+                    "type": response_type,
+                    "author": author,
+                    "timestamp": timestamp,
+                    "content": content
+                })
+
+        if len(batch) < per_page:
+            break
+        page += 1
+
+    # 4) Deduplicate based on (author, content, timestamp)
     responses = deduplicate_items(
         responses,
-        key_func=lambda item: (
-            item.get("author", ""), 
-            item.get("content", ""), 
-            item.get("timestamp", "")
-        ) if item.get("timestamp") else (
-            item.get("author", ""), 
-            item.get("content", "")
+        key_func=lambda r: (
+            r.get("author",""), r.get("content",""), r.get("timestamp","")
         )
     )
-    
+
     logger.info("Finished scraping fixes. Total unique responses: %d", len(responses))
     return json.dumps({"responses": responses}, indent=2)
 
+# --------------------- on_submit (GUI Handler) ---------------------
 def on_submit():
     logger.info("Submit button pressed.")
     url = url_text.get("1.0", tk.END).strip()
     if not url:
         logger.info("No URL provided; defaulting to issues page.")
-        url = "https://github.com/vercel/nft/issues"
+        url = "https://github.com/neovim/neovim/issues"
     
     mode = mode_var.get()
     logger.info("Mode selected: %s", mode)
     
     output_path_input = output_entry.get().strip()
     if not output_path_input:
+        # default paths
         if mode == "issues":
             output_path_input = "~/Desktop/issues"
         elif mode == "fixes":
@@ -216,7 +268,7 @@ def on_submit():
     
     try:
         os.makedirs(os.path.dirname(output_path), exist_ok=True)
-        with open(output_path, "w") as f:
+        with open(output_path, "w", encoding="utf-8") as f:
             f.write(output)
         logger.info("Results successfully written to %s", output_path)
     except Exception as e:
@@ -224,20 +276,19 @@ def on_submit():
 
 # --------------------- GUI Setup ---------------------
 root = tk.Tk()
-root.title("GitHub Issues/Fix Pages Scraper")
+root.title("GitHub Issues/Fix Pages Scraper (REST API)")
 
-url_label = tk.Label(root, text="Input page URL from GitHub:")
+url_label = tk.Label(root, text="Input GitHub Issues/Pull URL:")
 url_label.pack(pady=(10, 0))
 
 url_text = tk.Text(root, wrap=tk.WORD, width=50, height=4)
-url_text.insert(tk.END, "https://github.com/vercel/nft/issues")
+url_text.insert(tk.END, "https://github.com/neovim/neovim/issues")
 url_text.pack(padx=10, pady=10)
 
 output_label = tk.Label(root, text="Specify output file path (e.g., ~/Desktop/filename):")
 output_label.pack(pady=(10, 0))
 
 output_entry = tk.Entry(root, width=50)
-# Set the default based on the default mode ("issues").
 output_entry.insert(tk.END, "~/Desktop/issues")
 output_entry.pack(padx=10, pady=10)
 
@@ -251,7 +302,6 @@ radio_issues.pack(side=tk.LEFT, padx=10)
 radio_fixes = tk.Radiobutton(mode_frame, text="Fix Pages", variable=mode_var, value="fixes")
 radio_fixes.pack(side=tk.LEFT, padx=10)
 
-# Update output file path based on radio button selection.
 def update_output_default(*args):
     mode = mode_var.get()
     if mode == "issues":
