@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 import os
 import requests
-import pandas
-import matplotlib
 from bs4 import BeautifulSoup
-import openai
 import json
 import tkinter as tk
 import logging
@@ -171,7 +168,14 @@ def scrape_fix_pages(url):
     # Deduplicate responses based on (author, content, timestamp) or (author, content) if timestamp is empty.
     responses = deduplicate_items(
         responses,
-        key_func=lambda item: (item.get("author", ""), item.get("content", ""), item.get("timestamp", "")) if item.get("timestamp") else (item.get("author", ""), item.get("content", ""))
+        key_func=lambda item: (
+            item.get("author", ""), 
+            item.get("content", ""), 
+            item.get("timestamp", "")
+        ) if item.get("timestamp") else (
+            item.get("author", ""), 
+            item.get("content", "")
+        )
     )
     
     logger.info("Finished scraping fixes. Total unique responses: %d", len(responses))
@@ -224,12 +228,14 @@ root.title("GitHub Issues/Fix Pages Scraper")
 
 url_label = tk.Label(root, text="Input page URL from GitHub:")
 url_label.pack(pady=(10, 0))
+
 url_text = tk.Text(root, wrap=tk.WORD, width=50, height=4)
 url_text.insert(tk.END, "https://github.com/vercel/nft/issues")
 url_text.pack(padx=10, pady=10)
 
 output_label = tk.Label(root, text="Specify output file path (e.g., ~/Desktop/filename):")
 output_label.pack(pady=(10, 0))
+
 output_entry = tk.Entry(root, width=50)
 # Set the default based on the default mode ("issues").
 output_entry.insert(tk.END, "~/Desktop/issues")
@@ -238,8 +244,10 @@ output_entry.pack(padx=10, pady=10)
 mode_var = tk.StringVar(value="issues")
 mode_frame = tk.Frame(root)
 mode_frame.pack(pady=(10, 0))
+
 radio_issues = tk.Radiobutton(mode_frame, text="Issue Pages", variable=mode_var, value="issues")
 radio_issues.pack(side=tk.LEFT, padx=10)
+
 radio_fixes = tk.Radiobutton(mode_frame, text="Fix Pages", variable=mode_var, value="fixes")
 radio_fixes.pack(side=tk.LEFT, padx=10)
 
@@ -255,7 +263,6 @@ def update_output_default(*args):
     output_entry.delete(0, tk.END)
     output_entry.insert(tk.END, default_path)
 
-# Use trace_add for newer Tkinter versions.
 mode_var.trace_add("write", update_output_default)
 
 submit_button = tk.Button(root, text="Submit", command=on_submit)

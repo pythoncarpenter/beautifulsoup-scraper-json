@@ -1,6 +1,6 @@
 #!/bin/bash
-# run.sh - Comprehensive one-click setup with recursive retry, network timeout handling,
-# and graceful error handling for first-time execution.
+# run.sh - One-click setup with pipenv, strict error handling, and a native Tkinter GUI on macOS.
+# This version removes XQuartz references so that Tkinter uses the native Cocoa/Aqua framework.
 
 # --- Enable Strict Error Handling ---
 set -euo pipefail
@@ -23,17 +23,6 @@ retry_pipenv_install() {
     done
     echo "pipenv install failed after $retries attempts."
     return 1
-}
-
-# --- Function: Check and wait for XQuartz on macOS (recursive) ---
-check_xquartz_recursive() {
-    if pgrep -x "XQuartz" > /dev/null; then
-        echo "XQuartz is running."
-    else
-        echo "XQuartz not running. Retrying in 2 seconds..."
-        sleep 2
-        check_xquartz_recursive  # Recursive call until XQuartz is detected.
-    fi
 }
 
 # --- Function: Setup environment and run scraper (recursive retry) ---
@@ -85,37 +74,22 @@ setup_and_run() {
         exit 1
     fi
 
-    # Step 5: (Optional) Verify packages are installed.
-    #         Removed strict checks for pandas, numpy, statsmodels, matplotlib, and openai.
-    #         If you have specific packages you DO want to enforce, add them here.
-
+    # Step 5: (Optional) Package checks removed or simplified. Adjust if needed.
     echo "Environment checks passed."
 
-    # Step 6: Setup system-specific GUI engine.
+    # Step 6: Native macOS (Cocoa) Tkinter requires NO XQuartz. Remove or comment out all XQuartz logic.
     os_type=$(uname)
     if [[ "$os_type" == "Darwin" ]]; then
-        # On macOS, ensure XQuartz is running if your application needs X11.
-        # Remove or comment out these lines if you don't need XQuartz at all:
-        if ! pgrep -x "XQuartz" > /dev/null; then
-            echo "XQuartz is not running. Launching XQuartz..."
-            open -a XQuartz || { echo "Error: Failed to launch XQuartz. Aborting."; exit 1; }
-        fi
-        # Use recursive function to wait for XQuartz.
-        check_xquartz_recursive
-        # Set DISPLAY if not already set.
-        if [ -z "${DISPLAY:-}" ]; then
-            echo "DISPLAY variable not set. Setting to :0.0 for GUI support."
-            export DISPLAY=:0.0
-        fi
+        echo "Running on macOS. Tkinter will use native Cocoa (Aqua) by default."
     elif [[ "$os_type" == "Linux" ]]; then
         if [ -z "${DISPLAY:-}" ]; then
             echo "Warning: DISPLAY is not set. Ensure an X server is running for GUI support." >&2
         fi
     elif [[ "$os_type" == MINGW* || "$os_type" == CYGWIN* ]]; then
-        echo "Windows detected. Please ensure you have a compatible GUI engine available." >&2
+        echo "Windows detected. Ensure a compatible GUI is available." >&2
     fi
 
-    # Step 7: Run the scraper application.
+    # Step 7: Run the scraper application (main.py).
     echo "Starting the scraper application..."
     if [ -z "${VIRTUAL_ENV:-}" ]; then
         pipenv run python main.py || { echo "Error: Running main.py failed."; exit 1; }
