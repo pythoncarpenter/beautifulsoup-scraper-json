@@ -1,157 +1,169 @@
 #!/usr/bin/env python3
 import os
 import re
-import requests
+import sys
 import json
-import tkinter as tk
 import logging
-import uuid
+import requests
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import ttk
 from dotenv import load_dotenv
+from sklearn.feature_extraction.text import TfidfVectorizer
+import datetime
+import threading
+import queue
 
-# Load environment variables from the .env file located next to this script
-dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
-load_dotenv(dotenv_path)
-token = os.getenv("GITHUB_TOKEN", "")
-print("GITHUB_TOKEN:", token)  # For debugging; remove or secure in production
+# Global flag to indicate whether submission was made
+submitted = False
+logger = None  # Initialize logger to None
 
-# --------------------- Logging Setup ---------------------
-project_root = os.path.dirname(os.path.abspath(__file__))
-log_file = os.path.join(project_root, "scrape.log")
-logging.basicConfig(
-    filename=log_file,
-    level=logging.DEBUG,
-    format="%(asctime)s %(levelname)s: %(message)s",
-    datefmt="%Y-%m-%d %H:%M:%S"
-)
-logger = logging.getLogger()
+def setup_logging():
+    """Configures the logging for the application."""
+    global logger  # Declare logger as global so it can be used everywhere
+    if getattr(sys, 'frozen', False):
+        # Running in a bundle
+        application_path = sys._MEIPASS
+    else:
+        # Running as a script
+        application_path = os.path.dirname(os.path.abspath(__file__))
+    log_file = os.path.join(application_path, "scrape.log")
+    logging.basicConfig(
+        filename=log_file,
+        level=logging.DEBUG,
+        format="%(asctime)s %(levelname)s: %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S"
+    )
+    logger = logging.getLogger()
+    logger.debug("Logging initialized. Project root: %s", application_path)
 
-# --------------------- Utility: Parse GitHub Repo URL ---------------------
+
+def load_environment_variables():
+    """Loads environment variables, specifically the GITHUB_TOKEN."""
+    if getattr(sys, 'frozen', False):
+        # Running in a bundle
+        application_path = sys._MEIPASS
+    else:
+        # Running as a script
+        application_path = os.path.dirname(os.path.abspath(__file__))
+
+    dotenv_path = os.path.join(application_path, '.env')
+    load_dotenv(dotenv_path)
+    # Do NOT print the token:  print("GITHUB_TOKEN:", token)
+
 def parse_repo_url(url):
     """
     Given a GitHub URL like 'https://github.com/owner/repo/issues',
     return (owner, repo). Raise ValueError if the URL is not valid.
     """
+    logger.debug("Parsing repository URL: %s", url)
     parts = url.strip().strip("/").split("/")
     if len(parts) < 5 or parts[-1] not in ("issues", "pulls", "pull"):
-        raise ValueError(f"Not a valid GitHub issues/pulls URL: {url}")
+        error_msg = f"Not a valid GitHub issues/pulls URL: {url}"
+        logger.error(error_msg)
+        raise ValueError(error_msg)
     owner = parts[-3]
     repo = parts[-2]
+    logger.debug("Parsed owner: %s, repo: %s", owner, repo)
     return owner, repo
 
-# --------------------- Chunked GitHub Issues Scraper ---------------------
-def scrape_github_issues_chunked(url, output_path, per_page=100):
+def extract_keywords(prompt_text, top_n=10):
     """
-    Fetch issues from the given GitHub repository URL in chunks.
-    Captures only minimal fields:
-      - number
-      - title
-      - body (the context of the issue)
-      - url
+    Use TF-IDF analysis on the prompt text to extract top keywords.
+    Handles edge cases and provides better keyword selection.
+    """
+    logger.debug("Extracting keywords from prompt text.")
+    docs = [line.strip() for line in prompt_text.splitlines() if line.strip()]
+    if not docs:
+        return []  # Return an empty list if there's no meaningful input
 
-    Each page of issues is immediately written to output_path (a JSON file)
-    to keep memory usage low and speed up processing.
+    try:
+        vectorizer = TfidfVectorizer(stop_words="english", min_df=1, ngram_range=(1, 2))  # Consider 1 and 2-word phrases
+        tfidf_matrix = vectorizer.fit_transform(docs)
+        scores = tfidf_matrix.sum(axis=0).A1
+        terms = vectorizer.get_feature_names_out()
+        term_scores = list(zip(terms, scores))
+        term_scores.sort(key=lambda x: x[1], reverse=True)
+
+        # Filter out terms that are substrings of other terms (prefer longer terms)
+        filtered_terms = []
+        for term, score in term_scores:
+            if not any(other_term != term and term in other_term for other_term, _ in filtered_terms):
+                filtered_terms.append((term, score))
+
+        keywords = [term for term, score in filtered_terms[:top_n]]
+        logger.debug("Extracted keywords: %s", keywords)
+        return keywords
+    except Exception as e:
+        logger.error("TF-IDF extraction failed: %s", e)
+        return []
+
+def get_filtered_keywords(prompt_text, github_url, desired_count=5, extract_count=10):
     """
-    logger.info("Starting chunked scrape_github_issues for URL: %s", url)
+    Extracts and filters keywords, handling potential errors gracefully.
+    """
+    logger.debug("Getting filtered keywords for URL: %s", github_url)
+    extracted = extract_keywords(prompt_text, top_n=extract_count)
+    if not extracted:  # Handle the case where no keywords are extracted
+        return []
+
+    try:
+        _, repo_name = parse_repo_url(github_url)
+    except ValueError:
+        repo_name = ""  # Use an empty string if parsing fails
+
+    blocked_list = {"bug", "report", "issue", "fix", "error", "problem", "test", "todo"}
+    filtered = [
+        kw for kw in extracted
+        if kw.lower() != repo_name.lower() and kw.lower() not in blocked_list
+    ]
+    logger.debug("Filtered keywords: %s", filtered)
+    return filtered[:desired_count]
+
+def issue_matches(issue, keywords):
+    """
+    Check if any of the keywords (case-insensitive) appear in the issue's title or body.
+    """
+    title = (issue.get("title") or "").lower()
+    body = (issue.get("body") or "").lower()
+    for kw in keywords:
+        if kw.lower() in title or kw.lower() in body:
+            logger.debug("Issue #%s matches keyword: %s", issue.get("number"), kw)
+            return True
+    return False
+
+def write_chunk_to_file(file_handle, chunk, first_item_flag):
+    """
+    Write a list of issue dicts (chunk) to an already-open file.
+    The file is assumed to be a JSON array that has been started.
+    first_item_flag is a mutable list containing one boolean element so that it
+    can be updated across calls (to handle commas correctly).
+    """
+    logger.debug("Writing chunk of %d issues to file.", len(chunk))
+    for item in chunk:
+        if not first_item_flag[0]:
+            file_handle.write(",\n")
+        else:
+            first_item_flag[0] = False
+        json.dump(item, file_handle)
+    file_handle.flush()
+
+def scrape_github_issues_with_filter(url, output_path, keywords, chunk_size=50, per_page=100, max_pages=200):
+    """
+    Scrapes issues, handles errors, and writes output.  Returns the output path on success,
+    or an error string on failure.
+    """
+    logger.info("Starting filtered scrape for URL: %s", url)
     try:
         owner, repo = parse_repo_url(url)
     except ValueError as e:
-        logger.error(str(e))
-        return json.dumps({"error": "Invalid GitHub issues URL"}, indent=2)
+        logger.error("Error in URL parsing: %s", e)
+        return f"Error: Invalid GitHub issues URL: {e}" # Return error string
 
     token = os.getenv("GITHUB_TOKEN", "")
     if not token:
         logger.error("GITHUB_TOKEN missing in environment.")
-        return json.dumps({"error": "Missing GITHUB_TOKEN"}, indent=2)
-
-    headers = {
-        "Accept": "application/vnd.github+json",
-        "Authorization": f"Bearer {token}"
-    }
-    session = requests.Session()  # Reuse connections for speed
-    page = 1
-    first_item = True
-
-    # Open the file for incremental writing
-    with open(output_path, "w", encoding="utf-8") as f_out:
-        f_out.write("[\n")  # Begin JSON array
-        while True:
-            logger.info("Fetching page %d", page)
-            try:
-                resp = session.get(
-                    f"https://api.github.com/repos/{owner}/{repo}/issues",
-                    headers=headers,
-                    params={"state": "all", "page": page, "per_page": per_page},
-                    timeout=10  # seconds
-                )
-            except requests.exceptions.RequestException as e:
-                logger.error("Request failed: %s", e)
-                break
-
-            if resp.status_code != 200:
-                logger.error("Failed to fetch issues: %d %s", resp.status_code, resp.text)
-                break
-
-            batch = resp.json()
-            if not isinstance(batch, list) or len(batch) == 0:
-                logger.info("No more issues found.")
-                break
-
-            # Process each issue in the batch
-            for item in batch:
-                # Skip pull requests if present (remove this check if you need them)
-                if "pull_request" in item:
-                    continue
-
-                minimal_item = {
-                    "number": item.get("number"),
-                    "title": item.get("title"),
-                    "body": item.get("body"),       # Context of the issue
-                    "url": item.get("html_url")
-                }
-                if not first_item:
-                    f_out.write(",\n")
-                else:
-                    first_item = False
-
-                json.dump(minimal_item, f_out)
-
-            # Flush data to disk after each chunk
-            f_out.flush()
-
-            # If the batch size is smaller than per_page, we've reached the last page
-            if len(batch) < per_page:
-                logger.info("Last page reached.")
-                break
-
-            page += 1
-        f_out.write("\n]")  # End JSON array
-
-    logger.info("Finished scraping issues. Results written to %s", output_path)
-    return output_path
-
-# --------------------- Fix Pages Scraper (for PR Comments) ---------------------
-def scrape_fix_pages(url):
-    """
-    Fetch pull request comments.
-    Captures minimal information.
-    """
-    logger.info("Starting scrape_fix_pages for URL: %s", url)
-    try:
-        owner, repo = parse_repo_url(url)
-        pr_number = None
-        match = re.search(r"/pull/(\d+)", url)
-        if match:
-            pr_number = int(match.group(1))
-        if not pr_number:
-            raise ValueError("Could not extract PR number from URL.")
-    except ValueError as e:
-        logger.error(str(e))
-        return json.dumps({"error": "Invalid GitHub PR URL"}, indent=2)
-
-    token = os.getenv("GITHUB_TOKEN", "")
-    if not token:
-        logger.error("GITHUB_TOKEN missing in environment.")
-        return json.dumps({"error": "Missing GITHUB_TOKEN"}, indent=2)
+        return "Error: Missing GITHUB_TOKEN"
 
     headers = {
         "Accept": "application/vnd.github+json",
@@ -159,123 +171,193 @@ def scrape_fix_pages(url):
     }
     session = requests.Session()
     page = 1
-    responses = []
-    per_page = 100
+    chunk = []
+    first_item_flag = [True]  # Used for proper JSON formatting
 
-    while True:
-        logger.info("Fetching PR comments page %d", page)
-        try:
-            resp = session.get(
-                f"https://api.github.com/repos/{owner}/{repo}/issues/{pr_number}/comments",
-                headers=headers,
-                params={"page": page, "per_page": per_page},
-                timeout=10
-            )
-        except requests.exceptions.RequestException as e:
-            logger.error("Request failed: %s", e)
-            break
+    three_months_ago = datetime.datetime.now(datetime.timezone.utc) - datetime.timedelta(days=90)
+    logger.debug("Only processing issues from after: %s", three_months_ago.isoformat())
 
-        if resp.status_code != 200:
-            logger.error("Failed to fetch PR comments: %d %s", resp.status_code, resp.text)
-            break
+    with open(output_path, "w", encoding="utf-8") as f_out:
+        # Write header with timestamp and keywords.
+        timestamp = datetime.datetime.now().isoformat()
+        f_out.write("// Timestamp: " + timestamp + "\n")
+        f_out.write("// Keywords: " + ", ".join(keywords) + "\n")
+        f_out.write("[\n")  # Start JSON array
+        logger.debug("Output file %s initialized with header.", output_path)
 
-        batch = resp.json()
-        if not isinstance(batch, list) or len(batch) == 0:
-            break
+        while page <= max_pages:
+            logger.info("Fetching page %d", page)
+            try:
+                resp = session.get(
+                    f"https://api.github.com/repos/{owner}/{repo}/issues",
+                    headers=headers,
+                    params={"state": "all", "page": page, "per_page": per_page},
+                    timeout=10
+                )
+                resp.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+                batch = resp.json()
 
-        for item in batch:
-            minimal_item = {
-                "id": str(uuid.uuid4()),
-                "body": item.get("body"),
-                "url": item.get("html_url")
-            }
-            responses.append(minimal_item)
+                # Add checks for unexpected API responses
+                if not isinstance(batch, list):
+                    logger.error("Unexpected response from GitHub API: %s", resp.text)
+                    return "Error: Unexpected response from GitHub API"
+            except requests.exceptions.RequestException as e:
+                logger.error("Request failed on page %d: %s", page, e)
+                return f"Error: Network request failed: {e}"
+            except json.JSONDecodeError as e:
+                logger.error("Failed to decode JSON response on page %d: %s", page, e)
+                return f"Error: Failed to decode JSON: {e}"
+            except Exception as e:
+                return f"Error: {e}"
 
-        if len(batch) < per_page:
-            break
-        page += 1
+            if not batch:
+                logger.info("No more issues found on page %d.", page)
+                break
 
-    logger.info("Finished scraping fixes. Total responses: %d", len(responses))
-    return json.dumps({"responses": responses}, indent=2)
+            last_issue_date = None
+            if batch:
+                last_issue = batch[-1]
+                created_at_str = last_issue.get("created_at")
+                if created_at_str:
+                    try:
+                        last_issue_date = datetime.datetime.fromisoformat(created_at_str.replace("Z", "+00:00"))
+                    except Exception as e:
+                        logger.error("Error parsing created_at on page %d: %s", page, e)
 
-# --------------------- on_submit (GUI Handler) ---------------------
-def on_submit():
-    logger.info("Submit button pressed.")
-    url = url_text.get("1.0", tk.END).strip()
-    if not url:
-        logger.info("No URL provided; defaulting to issues page.")
-        url = "https://github.com/neovim/neovim/issues"
-    mode = mode_var.get()
-    logger.info("Mode selected: %s", mode)
+            is_final_page = last_issue_date and (last_issue_date < three_months_ago)
+            logger.debug("Is final page? %s", is_final_page)
+
+            page_text = " ".join(
+                ((issue.get("title") or "") + " " + (issue.get("body") or ""))
+                for issue in batch if "pull_request" not in issue
+            ).lower()
+
+            if not any(kw.lower() in page_text for kw in keywords):
+                logger.info("No keywords found in page %d; skipping.", page)
+                if len(batch) < per_page:
+                    break
+                page += 1
+                continue
+
+            for item in batch:
+                if "pull_request" in item:
+                    continue
+                created_at_str = item.get("created_at")
+                if created_at_str:
+                    try:
+                        issue_date = datetime.datetime.fromisoformat(created_at_str.replace("Z", "+00:00"))
+                    except Exception as e:
+                        logger.error("Error parsing created_at for an issue: %s", e)
+                        continue
+                    if issue_date < three_months_ago:
+                        continue
+                else:
+                    continue
+
+                if issue_matches(item, keywords):
+                    minimal_item = {
+                        "number": item.get("number"),
+                        "title": item.get("title"),
+                        "body": item.get("body"),
+                        "url": item.get("html_url")
+                    }
+                    chunk.append(minimal_item)
+                    logger.debug("Added issue #%s to chunk.", item.get("number"))
+                    if len(chunk) >= chunk_size:
+                        write_chunk_to_file(f_out, chunk, first_item_flag)
+                        logger.debug("Chunk written to file. Resetting chunk.")
+                        chunk = []
+
+            if is_final_page:
+                logger.info("Reached issues older than cutoff on page %d; stopping.", page)
+                break
+
+            page += 1
+
+        if chunk:
+            write_chunk_to_file(f_out, chunk, first_item_flag)
+            logger.debug("Final chunk written to file.")
+        f_out.write("\n]")  # End JSON array
+        logger.info("Finished writing output to %s", output_path)
+
+    return output_path
+
+def create_gui():
+    """Creates and configures the Tkinter GUI."""
+    root = tk.Tk()
+    root.title("GitHub Issues/Fix Pages Scraper (REST API)")
+    logger.debug("Tkinter GUI initialized.")
+
+    # Create blank input fields.
+    url_label = tk.Label(root, text="GitHub Issues/Pull URL:")
+    url_label.grid(row=0, column=0, padx=10, pady=(10, 0), sticky="w")
+    url_text = tk.Text(root, wrap=tk.WORD, width=50, height=2)
+    url_text.insert(tk.END, "")
+    url_text.grid(row=1, column=0, padx=10, pady=(0, 10))
+
+    prompt_label = tk.Label(root, text="Enter Prompt (for keyword extraction):")
+    prompt_label.grid(row=2, column=0, padx=10, pady=(10, 0), sticky="w")
+    prompt_text = tk.Text(root, wrap=tk.WORD, width=50, height=8)
+    prompt_text.insert(tk.END, "")
+    prompt_text.grid(row=3, column=0, padx=10, pady=(0, 10))
+
+    output_label = tk.Label(root, text="Output File Path (e.g., ~/Desktop/issues):")
+    output_label.grid(row=4, column=0, padx=10, pady=(10, 0), sticky="w")
+    output_entry = tk.Entry(root, width=50)
+    output_entry.insert(tk.END, "")
+    output_entry.grid(row=5, column=0, padx=10, pady=(0, 10))
+
+    keywords_label = tk.Label(root, text="Extracted Keywords: (none yet)")
+    keywords_label.grid(row=6, column=0, padx=10, pady=(10, 0), sticky="w")
+
+    submit_button = tk.Button(root, text="Submit", width=20, command=lambda: on_submit(
+        root, url_text, prompt_text, output_entry, keywords_label, submit_button
+    ))
+    submit_button.grid(row=7, column=0, padx=10, pady=(10, 20))
+
+    root.protocol("WM_DELETE_WINDOW", lambda: on_closing(root))
+    return root
+
+def on_closing(root):
+    global submitted
+    if not submitted:
+        logger.error("Window closed without user submission. No task was performed.")
+        root.destroy()  # Use destroy directly, no need for quit
+    else:
+        logger.debug("Window close requested after submission; GUI will close after task completion.")
+
+def on_submit(root, url_text, prompt_text, output_entry, keywords_label, submit_button):
+    global submitted
+    submitted = True  # Set the global flag
+    logger.debug("Submit button clicked.")
+
+    # --- 1. Disable GUI Elements ---
+    url_text.config(state="disabled")
+    prompt_text.config(state="disabled")
+    output_entry.config(state="disabled")
+    submit_button.config(state="disabled", text="Loading...")
+
+    # --- 2. Get Input Values ---
+    url_value = url_text.get("1.0", tk.END).strip()
+    prompt_value = prompt_text.get("1.0", tk.END).strip()
     output_path_input = output_entry.get().strip()
+
+    # --- 3. Input Validation (Basic) ---
+    if not url_value or not prompt_value:
+        messagebox.showerror("Error", "Please enter both a URL and a prompt.")
+        reset_gui(url_text, prompt_text, output_entry, submit_button, keywords_label)
+        return
+
     if not output_path_input:
-        if mode == "issues":
-            output_path_input = "~/Desktop/issues"
-        elif mode == "fixes":
-            output_path_input = "~/Desktop/fixes"
-        else:
-            output_path_input = "~/Desktop/output"
-        logger.info("No output path provided; defaulting to: %s", output_path_input)
+        output_path_input = "~/Desktop/issues"
     output_path = os.path.expanduser(output_path_input)
     if not output_path.endswith(".json"):
         output_path += ".json"
-    root.destroy()
-    if mode == "issues":
-        result = scrape_github_issues_chunked(url, output_path, per_page=100)
-    elif mode == "fixes":
-        output = scrape_fix_pages(url)
-        try:
-            os.makedirs(os.path.dirname(output_path), exist_ok=True)
-            with open(output_path, "w", encoding="utf-8") as f:
-                f.write(output)
-        except Exception as e:
-            logger.error("Error writing file: %s", e)
-        result = output_path
-    else:
-        result = json.dumps({"error": "Unknown mode"}, indent=2)
-    logger.info("Results written to %s", result)
+    logger.debug("Output path resolved to: %s", output_path)
 
-# --------------------- GUI Setup ---------------------
-root = tk.Tk()
-root.title("GitHub Issues/Fix Pages Scraper (REST API)")
-
-url_label = tk.Label(root, text="Input GitHub Issues/Pull URL:")
-url_label.pack(pady=(10, 0))
-
-url_text = tk.Text(root, wrap=tk.WORD, width=50, height=4)
-url_text.insert(tk.END, "https://github.com/neovim/neovim/issues")
-url_text.pack(padx=10, pady=10)
-
-output_label = tk.Label(root, text="Specify output file path (e.g., ~/Desktop/filename):")
-output_label.pack(pady=(10, 0))
-
-output_entry = tk.Entry(root, width=50)
-output_entry.insert(tk.END, "~/Desktop/issues")
-output_entry.pack(padx=10, pady=10)
-
-mode_var = tk.StringVar(value="issues")
-mode_frame = tk.Frame(root)
-mode_frame.pack(pady=(10, 0))
-
-radio_issues = tk.Radiobutton(mode_frame, text="Issue Pages", variable=mode_var, value="issues")
-radio_issues.pack(side=tk.LEFT, padx=10)
-radio_fixes = tk.Radiobutton(mode_frame, text="Fix Pages", variable=mode_var, value="fixes")
-radio_fixes.pack(side=tk.LEFT, padx=10)
-
-def update_output_default(*args):
-    mode = mode_var.get()
-    if mode == "issues":
-        default_path = "~/Desktop/issues"
-    elif mode == "fixes":
-        default_path = "~/Desktop/fixes"
-    else:
-        default_path = "~/Desktop/output"
-    output_entry.delete(0, tk.END)
-    output_entry.insert(tk.END, default_path)
-
-mode_var.trace_add("write", update_output_default)
-
-submit_button = tk.Button(root, text="Submit", command=on_submit)
-submit_button.pack(pady=(10, 10))
-
-root.mainloop()
+    # --- 4. Keyword Extraction ---
+    try:
+        keywords = get_filtered_keywords(prompt_value, url_value)
+        keywords_label.config(text="Extracted Keywords: " + ", ".join(keywords))
+    except Exception as e:
+        messagebox.showerror("

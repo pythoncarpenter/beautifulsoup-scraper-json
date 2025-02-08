@@ -10,18 +10,40 @@ def run_scraper():
     Assumes run.sh writes a JSON file to ~/Desktop/issues.json 
     (or your chosen path).
     """
-    # 1. Set up the environment or arguments as needed:
-    #    For example, you might set an environment variable if your run.sh uses it:
-    #    os.environ["SCRAPER_URL"] = "https://github.com/vercel/nft/issues"
+    # Optionally, set environment variables if needed:
+    # os.environ["SCRAPER_URL"] = "https://github.com/neovim/neovim/issues"
 
-    # 2. Run the script. This should create or update ~/Desktop/issues.json.
-    #    If your script depends on being in a certain directory, cd into it first.
-    #    Use shell=True only if strictly necessary:
+    # Run the script. This should create or update ~/Desktop/issues.json.
     subprocess.run(["./run.sh"], check=True)
 
-    # 3. Return the path to the JSON output so we can read it in subsequent tests.
-    #    Adjust to match your script's actual output path (e.g., ~/Desktop/issues.json).
+    # Return the path to the JSON output.
     return os.path.expanduser("~/Desktop/issues.json")
+
+def _load_json_without_comments(output_path):
+    """
+    Loads JSON content from a file that may have comment lines (starting with //) at the top.
+    """
+    with open(output_path, "r", encoding="utf-8") as f:
+        lines = f.readlines()
+    # Filter out lines starting with //
+    json_str = "".join(line for line in lines if not line.lstrip().startswith("//"))
+    return json.loads(json_str)
+
+def _get_keywords_from_output(output_path):
+    """
+    Reads the keywords comment line from the output file.
+    Assumes a comment line starting with "// Keywords:" exists.
+    Returns a list of keywords.
+    """
+    with open(output_path, "r", encoding="utf-8") as f:
+        for line in f:
+            if line.lstrip().startswith("// Keywords:"):
+                parts = line.split(":", 1)
+                if len(parts) < 2:
+                    return []
+                keywords_str = parts[1].strip()
+                return [kw.strip() for kw in keywords_str.split(",") if kw.strip()]
+    return []
 
 def test_scraper_output_exists(run_scraper):
     """
@@ -32,25 +54,27 @@ def test_scraper_output_exists(run_scraper):
 
 def test_multi_page_capture(run_scraper):
     """
-    Test that the scraper captured multiple pages of issues if there's a 'Next' link.
-    We check if the total number of issues is above a typical single-page count (e.g. 25).
+    Test that the scraper captured multiple pages of issues.
     """
     output_path = run_scraper
-
-    with open(output_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    # 'data' should be a list of issues if run.sh is in 'issues' mode.
-    # If it's a dict with {"responses": ...}, adapt accordingly.
+    data = _load_json_without_comments(output_path)
+    # Expecting a list of issues.
     assert isinstance(data, list), "Expected a list of issues in the JSON output."
-
     issue_count = len(data)
     print(f"Found {issue_count} issues.")
-
-    # A typical GitHub issues page might show 25 issues by default.
-    # If your repo definitely has more than 25, we expect the scraper 
-    # to follow the 'Next' link and collect more.
+    # Assume a typical GitHub issues page shows 25 issues; check for more than one page.
     assert issue_count > 25, "It appears we did not capture multiple pages."
 
-    # Optionally, you could check for a specific known item or number:
-    # assert any(issue["number"] == "999" for issue in data), "Item from page 2 missing."
+def test_keyword_filtering(run_scraper):
+    """
+    Test that the keywords used in the scraping process do not include:
+      - The repository name (for https://github.com/neovim/neovim/issues, 'neovim')
+      - Any blocked keywords (e.g. 'bug', 'report', etc.)
+    """
+    output_path = run_scraper
+    keywords = _get_keywords_from_output(output_path)
+    repo_name = "neovim"
+    blocked_list = {"bug", "report", "issue", "fix", "error", "problem", "test", "todo"}
+    for kw in keywords:
+        assert kw.lower() != repo_name.lower(), f"Keyword '{kw}' should not match repository name '{repo_name}'."
+        assert kw.lower() not in blocked_list, f"Keyword '{kw}' is in the blocked list."

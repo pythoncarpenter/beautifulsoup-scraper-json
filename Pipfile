@@ -8,6 +8,8 @@ requests = "*"
 pandas = "*"
 pytest = "*"
 python-dotenv = "*"
+tiktoken = "*"
+scikit-learn = "*"
 
 [dev-packages]
 

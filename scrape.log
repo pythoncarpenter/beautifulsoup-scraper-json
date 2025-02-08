@@ -1,635 +1,748 @@
-2025-02-01 17:26:35 INFO: Submit button pressed.
-2025-02-01 17:26:35 INFO: Mode selected: fixes
-2025-02-01 17:26:35 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
-2025-02-01 17:26:35 DEBUG: Starting new HTTPS connection (1): github.com:443
-2025-02-01 17:26:36 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
-2025-02-01 17:26:36 INFO: Received response with status code: 200
-2025-02-01 17:26:36 DEBUG: HTML snippet for fix page: 
+2025-02-08 01:22:21 INFO: Starting filtered scrape for URL: https://github.com/neovim/neovim/issues
+2025-02-08 01:22:21 INFO: Fetching page 1
+2025-02-08 01:22:21 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 01:22:21 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:21 INFO: Fetching page 2
+2025-02-08 01:22:22 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:22 INFO: Fetching page 3
+2025-02-08 01:22:22 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:23 INFO: Fetching page 4
+2025-02-08 01:22:23 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:23 INFO: Fetching page 5
+2025-02-08 01:22:24 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:24 INFO: Fetching page 6
+2025-02-08 01:22:24 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:24 INFO: Fetching page 7
+2025-02-08 01:22:25 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:25 INFO: Fetching page 8
+2025-02-08 01:22:26 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:26 INFO: Fetching page 9
+2025-02-08 01:22:26 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:26 INFO: Fetching page 10
+2025-02-08 01:22:27 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:27 INFO: Fetching page 11
+2025-02-08 01:22:28 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:28 INFO: Fetching page 12
+2025-02-08 01:22:28 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=12&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:28 INFO: Fetching page 13
+2025-02-08 01:22:29 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=13&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:29 INFO: Fetching page 14
+2025-02-08 01:22:30 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=14&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:30 INFO: Fetching page 15
+2025-02-08 01:22:30 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=15&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:30 INFO: Fetching page 16
+2025-02-08 01:22:31 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=16&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:31 INFO: Fetching page 17
+2025-02-08 01:22:32 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=17&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:32 INFO: Fetching page 18
+2025-02-08 01:22:32 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=18&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:32 INFO: Fetching page 19
+2025-02-08 01:22:33 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=19&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:33 INFO: Fetching page 20
+2025-02-08 01:22:33 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=20&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:33 INFO: Fetching page 21
+2025-02-08 01:22:34 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=21&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:34 INFO: Fetching page 22
+2025-02-08 01:22:35 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=22&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:35 INFO: Fetching page 23
+2025-02-08 01:22:35 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=23&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:36 INFO: Fetching page 24
+2025-02-08 01:22:36 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=24&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:36 INFO: Fetching page 25
+2025-02-08 01:22:37 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=25&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:37 INFO: Fetching page 26
+2025-02-08 01:22:37 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=26&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:37 INFO: Fetching page 27
+2025-02-08 01:22:38 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=27&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:38 INFO: Fetching page 28
+2025-02-08 01:22:39 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=28&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:39 INFO: Fetching page 29
+2025-02-08 01:22:39 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=29&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:40 INFO: Fetching page 30
+2025-02-08 01:22:40 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=30&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:40 INFO: Fetching page 31
+2025-02-08 01:22:41 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=31&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:41 INFO: Fetching page 32
+2025-02-08 01:22:42 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=32&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:42 INFO: Fetching page 33
+2025-02-08 01:22:42 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=33&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:42 INFO: Fetching page 34
+2025-02-08 01:22:43 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=34&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:43 INFO: Fetching page 35
+2025-02-08 01:22:44 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=35&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:44 INFO: Fetching page 36
+2025-02-08 01:22:44 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=36&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:44 INFO: Fetching page 37
+2025-02-08 01:22:45 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=37&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:45 INFO: Fetching page 38
+2025-02-08 01:22:46 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=38&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:46 INFO: Fetching page 39
+2025-02-08 01:22:46 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=39&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:46 INFO: Fetching page 40
+2025-02-08 01:22:47 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=40&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:47 INFO: Fetching page 41
+2025-02-08 01:22:48 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=41&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:48 INFO: Fetching page 42
+2025-02-08 01:22:49 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=42&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:49 INFO: Fetching page 43
+2025-02-08 01:22:49 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=43&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:49 INFO: Fetching page 44
+2025-02-08 01:22:50 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=44&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:50 INFO: Fetching page 45
+2025-02-08 01:22:51 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=45&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:51 INFO: Fetching page 46
+2025-02-08 01:22:51 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=46&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:51 INFO: Fetching page 47
+2025-02-08 01:22:52 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=47&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:52 INFO: Fetching page 48
+2025-02-08 01:22:53 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=48&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:53 INFO: Fetching page 49
+2025-02-08 01:22:53 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=49&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:53 INFO: Fetching page 50
+2025-02-08 01:22:54 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=50&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:54 INFO: Fetching page 51
+2025-02-08 01:22:55 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=51&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:55 INFO: Fetching page 52
+2025-02-08 01:22:55 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=52&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:55 INFO: Fetching page 53
+2025-02-08 01:22:56 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=53&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:56 INFO: Fetching page 54
+2025-02-08 01:22:57 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=54&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:57 INFO: Fetching page 55
+2025-02-08 01:22:57 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=55&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:57 INFO: Fetching page 56
+2025-02-08 01:22:58 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=56&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:58 INFO: Fetching page 57
+2025-02-08 01:22:59 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=57&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:59 INFO: Fetching page 58
+2025-02-08 01:22:59 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=58&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:22:59 INFO: Fetching page 59
+2025-02-08 01:23:00 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=59&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:00 INFO: Fetching page 60
+2025-02-08 01:23:01 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=60&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:01 INFO: Fetching page 61
+2025-02-08 01:23:02 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=61&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:02 INFO: Fetching page 62
+2025-02-08 01:23:02 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=62&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:02 INFO: Fetching page 63
+2025-02-08 01:23:03 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=63&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:03 INFO: Fetching page 64
+2025-02-08 01:23:04 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=64&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:04 INFO: Fetching page 65
+2025-02-08 01:23:05 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=65&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:05 INFO: Fetching page 66
+2025-02-08 01:23:06 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=66&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:06 INFO: Fetching page 67
+2025-02-08 01:23:06 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=67&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:06 INFO: Fetching page 68
+2025-02-08 01:23:07 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=68&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:07 INFO: Fetching page 69
+2025-02-08 01:23:08 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=69&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:08 INFO: Fetching page 70
+2025-02-08 01:23:09 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=70&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:09 INFO: Fetching page 71
+2025-02-08 01:23:10 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=71&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:10 INFO: Fetching page 72
+2025-02-08 01:23:10 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=72&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:10 INFO: Fetching page 73
+2025-02-08 01:23:11 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=73&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:11 INFO: Fetching page 74
+2025-02-08 01:23:12 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=74&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:23:12 INFO: Fetching page 75
+2025-02-08 01:34:08 INFO: Starting filtered scrape for URL: https://github.com/neovim/neovim/issues
+2025-02-08 01:34:08 INFO: Fetching page 1
+2025-02-08 01:34:08 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 01:34:08 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:34:09 INFO: Fetching page 2
+2025-02-08 01:34:09 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:34:09 INFO: Fetching page 3
+2025-02-08 01:34:10 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:34:10 INFO: Fetching page 4
+2025-02-08 01:34:10 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:34:10 INFO: Fetching page 5
+2025-02-08 01:34:11 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:34:11 INFO: Fetching page 6
+2025-02-08 01:34:11 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:34:11 INFO: Fetching page 7
+2025-02-08 01:34:12 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:34:12 INFO: Fetching page 8
+2025-02-08 01:34:12 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:34:12 INFO: Fetching page 9
+2025-02-08 01:34:13 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:34:13 INFO: Fetching page 10
+2025-02-08 01:34:13 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:34:13 INFO: Fetching page 11
+2025-02-08 01:34:14 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:34:14 INFO: Reached issues older than cutoff on page 11; stopping.
+2025-02-08 01:34:14 INFO: Finished scraping. Results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 01:34:14 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 01:45:27 INFO: Starting filtered scrape for URL: https://github.com/neovim/neovim/issues
+2025-02-08 01:45:27 INFO: Fetching page 1
+2025-02-08 01:45:27 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 01:45:28 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:45:28 INFO: Fetching page 2
+2025-02-08 01:45:28 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:45:28 INFO: Fetching page 3
+2025-02-08 01:45:29 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:45:29 INFO: Fetching page 4
+2025-02-08 01:45:29 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:45:30 INFO: Fetching page 5
+2025-02-08 01:45:30 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:45:30 INFO: Fetching page 6
+2025-02-08 01:45:31 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:45:31 INFO: Fetching page 7
+2025-02-08 01:45:31 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:45:31 INFO: Fetching page 8
+2025-02-08 01:45:32 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:45:32 INFO: Fetching page 9
+2025-02-08 01:45:33 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:45:33 INFO: Fetching page 10
+2025-02-08 01:45:33 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:45:33 INFO: Fetching page 11
+2025-02-08 01:45:34 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:45:34 INFO: Reached issues older than cutoff on page 11; stopping.
+2025-02-08 01:45:34 INFO: Finished scraping. Results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 01:45:34 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 01:48:44 INFO: Starting filtered scrape for URL: https://github.com/neovim/neovim/issues
+2025-02-08 01:48:44 INFO: Fetching page 1
+2025-02-08 01:48:44 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 01:48:45 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:48:45 INFO: Fetching page 2
+2025-02-08 01:48:45 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:48:45 INFO: Fetching page 3
+2025-02-08 01:48:46 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:48:46 INFO: Fetching page 4
+2025-02-08 01:48:46 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:48:46 INFO: Fetching page 5
+2025-02-08 01:48:47 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:48:47 INFO: Fetching page 6
+2025-02-08 01:48:47 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:48:47 INFO: Fetching page 7
+2025-02-08 01:48:48 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:48:48 INFO: Fetching page 8
+2025-02-08 01:48:49 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:48:49 INFO: Fetching page 9
+2025-02-08 01:48:49 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:48:49 INFO: Fetching page 10
+2025-02-08 01:48:50 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:48:50 INFO: Fetching page 11
+2025-02-08 01:48:50 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:48:50 INFO: Reached issues older than cutoff on page 11; stopping.
+2025-02-08 01:48:50 INFO: Finished scraping. Results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 01:48:50 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 01:52:33 INFO: Starting filtered scrape for URL: https://github.com/neovim/neovim/issues
+2025-02-08 01:52:33 INFO: Fetching page 1
+2025-02-08 01:52:33 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 01:52:33 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:52:34 INFO: Fetching page 2
+2025-02-08 01:52:34 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:52:34 INFO: Fetching page 3
+2025-02-08 01:52:35 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:52:35 INFO: Fetching page 4
+2025-02-08 01:52:35 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:52:35 INFO: Fetching page 5
+2025-02-08 01:52:36 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:52:36 INFO: Fetching page 6
+2025-02-08 01:52:36 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:52:36 INFO: Fetching page 7
+2025-02-08 01:52:37 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:52:37 INFO: Fetching page 8
+2025-02-08 01:52:37 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:52:37 INFO: Fetching page 9
+2025-02-08 01:52:38 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:52:38 INFO: Fetching page 10
+2025-02-08 01:52:38 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:52:38 INFO: Fetching page 11
+2025-02-08 01:52:38 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
+2025-02-08 01:52:38 INFO: Reached issues older than cutoff on page 11; stopping.
+2025-02-08 01:52:38 INFO: Finished scraping. Results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 01:52:38 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:00:14 INFO: Starting filtered scrape for URL: https://github.com/neovim/neovim/issues
+2025-02-08 02:00:14 INFO: Fetching page 1
+2025-02-08 02:00:14 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 02:00:15 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:00:15 INFO: Fetching page 2
+2025-02-08 02:00:16 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:00:16 INFO: Fetching page 3
+2025-02-08 02:00:16 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:00:16 INFO: Fetching page 4
+2025-02-08 02:00:17 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:00:17 INFO: Fetching page 5
+2025-02-08 02:00:17 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:00:17 INFO: Fetching page 6
+2025-02-08 02:00:18 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:00:18 INFO: Fetching page 7
+2025-02-08 02:00:18 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:00:18 INFO: Fetching page 8
+2025-02-08 02:00:19 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:00:19 INFO: Fetching page 9
+2025-02-08 02:00:19 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:00:19 INFO: Fetching page 10
+2025-02-08 02:00:19 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:00:20 INFO: Fetching page 11
+2025-02-08 02:00:20 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:00:20 INFO: Reached issues older than cutoff on page 11; stopping.
+2025-02-08 02:00:20 INFO: Finished scraping. Results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:00:20 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:06:28 INFO: Starting filtered scrape for URL: https://github.com/neovim/neovim/issues
+2025-02-08 02:06:28 INFO: Fetching page 1
+2025-02-08 02:06:28 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 02:06:28 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:06:28 INFO: Fetching page 2
+2025-02-08 02:06:29 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:06:29 INFO: Fetching page 3
+2025-02-08 02:06:29 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:06:29 INFO: Fetching page 4
+2025-02-08 02:06:30 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:06:30 INFO: Fetching page 5
+2025-02-08 02:06:30 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:06:30 INFO: Fetching page 6
+2025-02-08 02:06:31 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:06:31 INFO: Fetching page 7
+2025-02-08 02:06:32 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:06:32 INFO: Fetching page 8
+2025-02-08 02:06:32 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:06:32 INFO: Fetching page 9
+2025-02-08 02:06:33 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:06:33 INFO: Fetching page 10
+2025-02-08 02:06:34 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:06:34 INFO: Fetching page 11
+2025-02-08 02:06:34 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:06:34 INFO: Reached issues older than cutoff on page 11; stopping.
+2025-02-08 02:06:34 INFO: Finished scraping. Results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:06:34 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:07:56 INFO: Starting filtered scrape for URL: https://github.com/neovim/neovim/issues
+2025-02-08 02:07:56 INFO: Fetching page 1
+2025-02-08 02:07:56 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 02:07:57 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:07:57 INFO: Fetching page 2
+2025-02-08 02:07:57 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:07:57 INFO: Fetching page 3
+2025-02-08 02:07:58 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:07:58 INFO: Fetching page 4
+2025-02-08 02:07:58 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:07:58 INFO: Fetching page 5
+2025-02-08 02:07:59 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:07:59 INFO: Fetching page 6
+2025-02-08 02:07:59 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:07:59 INFO: Fetching page 7
+2025-02-08 02:08:00 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:08:00 INFO: Fetching page 8
+2025-02-08 02:08:00 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:08:00 INFO: Fetching page 9
+2025-02-08 02:08:01 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:08:01 INFO: Fetching page 10
+2025-02-08 02:08:02 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:08:02 INFO: Fetching page 11
+2025-02-08 02:08:02 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:08:02 INFO: Reached issues older than cutoff on page 11; stopping.
+2025-02-08 02:08:02 INFO: Finished scraping. Results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:08:02 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:10:47 INFO: Starting filtered scrape for URL: https://github.com/neovim/neovim/issues
+2025-02-08 02:10:47 INFO: Fetching page 1
+2025-02-08 02:10:47 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 02:10:47 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:10:47 INFO: Fetching page 2
+2025-02-08 02:10:48 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:10:48 INFO: Fetching page 3
+2025-02-08 02:10:48 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:10:48 INFO: Fetching page 4
+2025-02-08 02:10:49 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:10:49 INFO: Fetching page 5
+2025-02-08 02:10:49 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:10:49 INFO: Fetching page 6
+2025-02-08 02:10:50 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:10:50 INFO: Fetching page 7
+2025-02-08 02:10:50 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:10:50 INFO: Fetching page 8
+2025-02-08 02:10:51 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:10:51 INFO: Fetching page 9
+2025-02-08 02:10:51 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:10:51 INFO: Fetching page 10
+2025-02-08 02:10:52 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:10:52 INFO: Fetching page 11
+2025-02-08 02:10:52 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:10:52 INFO: Reached issues older than cutoff on page 11; stopping.
+2025-02-08 02:10:52 INFO: Finished scraping. Results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:10:52 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:12:53 DEBUG: Logging initialized. Project root: /Users/mitchmcquoid/z9b-projects/business_proj/www-gh-comms-scr
+2025-02-08 02:12:53 DEBUG: Tkinter GUI initialized.
+2025-02-08 02:12:53 DEBUG: Starting Tkinter main loop.
+2025-02-08 02:13:03 DEBUG: Submit button clicked.
+2025-02-08 02:13:03 DEBUG: URL: https://github.com/neovim/neovim/issues
+2025-02-08 02:13:03 DEBUG: Prompt: Bug Report: Treesitter Performance Regression in Neovim
 
-
-
-
-
-
-<!DOCTYPE html>
-<html
-  lang="en"
-  
-  data-color-mode="auto" data-light-theme="light" data-dark-theme="dark"
-  data-a11y-animated-images="system" data-a11y-link-underlines="true"
-  
-  >
-
-
-
-  <head>
-    <meta charset="utf-8">
-  <link rel="dns-prefetch" href="https://github.githubassets.com">
-...
-2025-02-01 17:26:36 INFO: Found 0 fix rows
-2025-02-01 17:26:36 INFO: Finished scraping fixes. Total fixes: 0
-2025-02-01 17:26:36 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes444.json
-2025-02-01 17:35:16 INFO: Submit button pressed.
-2025-02-01 17:35:16 INFO: Mode selected: fixes
-2025-02-01 17:35:16 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
-2025-02-01 17:35:16 DEBUG: Starting new HTTPS connection (1): github.com:443
-2025-02-01 17:35:17 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
-2025-02-01 17:35:17 INFO: Received response with status code: 200
-2025-02-01 17:35:17 INFO: Found 16 conversation items
-2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
-2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
-2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
-2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
-2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
-2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
-2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
-2025-02-01 17:35:17 DEBUG: Skipping an item due to missing content.
-2025-02-01 17:35:17 INFO: Finished scraping fixes. Total responses: 8
-2025-02-01 17:35:17 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fix2222.json
-2025-02-01 18:01:32 INFO: Submit button pressed.
-2025-02-01 18:01:32 INFO: Mode selected: fixes
-2025-02-01 18:01:32 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/issues
-2025-02-01 18:01:32 DEBUG: Starting new HTTPS connection (1): github.com:443
-2025-02-01 18:01:33 DEBUG: https://github.com:443 "GET /vercel/nft/issues HTTP/1.1" 200 None
-2025-02-01 18:01:33 INFO: Received response with status code: 200
-2025-02-01 18:01:33 INFO: Found 0 conversation items
-2025-02-01 18:01:33 INFO: Finished scraping fixes. Total responses: 0
-2025-02-01 18:01:33 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes.json
-2025-02-01 18:01:56 INFO: Submit button pressed.
-2025-02-01 18:01:56 INFO: Mode selected: fixes
-2025-02-01 18:01:56 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
-2025-02-01 18:01:56 DEBUG: Starting new HTTPS connection (1): github.com:443
-2025-02-01 18:01:57 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
-2025-02-01 18:01:57 INFO: Received response with status code: 200
-2025-02-01 18:01:57 INFO: Found 16 conversation items
-2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:01:57 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:01:57 INFO: Finished scraping fixes. Total responses: 8
-2025-02-01 18:01:57 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes999.json
-2025-02-01 18:05:36 INFO: Submit button pressed.
-2025-02-01 18:05:36 INFO: Mode selected: fixes
-2025-02-01 18:05:36 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
-2025-02-01 18:05:36 DEBUG: Starting new HTTPS connection (1): github.com:443
-2025-02-01 18:05:37 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
-2025-02-01 18:05:37 INFO: Received response with status code: 200
-2025-02-01 18:05:37 INFO: Found 16 conversation items
-2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:05:37 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:05:37 INFO: Duplicate item skipped: {'id': 'e8644d62-3114-479b-a35e-1d4d048271a8', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
-2025-02-01 18:05:37 INFO: Duplicate item skipped: {'id': '768bae17-0954-406b-9cd3-5e019dcb98f6', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
-2025-02-01 18:05:37 INFO: Duplicate item skipped: {'id': '559694fe-1185-4ea6-ba67-52af1cc8253b', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
-2025-02-01 18:05:37 INFO: Duplicate item skipped: {'id': '292da71c-ea21-481f-9d93-2338f60cc473', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
-2025-02-01 18:05:37 INFO: Finished scraping fixes. Total unique responses: 4
-2025-02-01 18:05:37 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes.json
-2025-02-01 18:09:54 INFO: Submit button pressed.
-2025-02-01 18:09:54 INFO: Mode selected: fixes
-2025-02-01 18:09:54 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
-2025-02-01 18:09:54 DEBUG: Starting new HTTPS connection (1): github.com:443
-2025-02-01 18:09:54 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
-2025-02-01 18:09:55 INFO: Received response with status code: 200
-2025-02-01 18:09:55 INFO: Found 16 conversation items
-2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:09:55 DEBUG: Skipping a fix item due to missing content.
-2025-02-01 18:09:55 INFO: Duplicate item skipped: {'id': 'ebfb88b5-3bf2-4362-89d5-3f5841c5c9c5', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
-2025-02-01 18:09:55 INFO: Duplicate item skipped: {'id': '55472a6d-cb5e-43b0-af86-1618b78f93a2', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
-2025-02-01 18:09:55 INFO: Duplicate item skipped: {'id': 'ccbffa3c-0b26-4c3a-aea7-af7e5244e059', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
-2025-02-01 18:09:55 INFO: Duplicate item skipped: {'id': 'b90abd5b-f152-43ed-807d-ec0f30613fe5', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
-2025-02-01 18:09:55 INFO: Finished scraping fixes. Total unique responses: 4
-2025-02-01 18:09:55 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes.json
-2025-02-07 21:07:34 INFO: Submit button pressed.
-2025-02-07 21:07:34 INFO: Mode selected: issues
-2025-02-07 21:07:34 INFO: Starting scrape_github_issues for URL: https://github.com/vercel/nft/issues
-2025-02-07 21:07:34 DEBUG: Starting new HTTPS connection (1): github.com:443
-2025-02-07 21:07:34 DEBUG: https://github.com:443 "GET /vercel/nft/issues HTTP/1.1" 200 None
-2025-02-07 21:07:34 INFO: Received response with status code: 200
-2025-02-07 21:07:34 INFO: Found 12 issue rows
-2025-02-07 21:07:34 INFO: Finished scraping issues. Total unique issues: 12
-2025-02-07 21:07:34 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/issues.json
-2025-02-07 21:12:13 INFO: Submit button pressed.
-2025-02-07 21:12:13 INFO: Mode selected: fixes
-2025-02-07 21:12:13 INFO: Starting scrape_fix_pages for URL: https://github.com/vercel/nft/pull/455
-2025-02-07 21:12:13 DEBUG: Starting new HTTPS connection (1): github.com:443
-2025-02-07 21:12:14 DEBUG: https://github.com:443 "GET /vercel/nft/pull/455 HTTP/1.1" 200 None
-2025-02-07 21:12:14 INFO: Received response with status code: 200
-2025-02-07 21:12:14 INFO: Found 16 conversation items
-2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
-2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
-2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
-2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
-2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
-2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
-2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
-2025-02-07 21:12:14 DEBUG: Skipping a fix item due to missing content.
-2025-02-07 21:12:14 INFO: Duplicate item skipped: {'id': 'cef636d1-97aa-4b24-ad12-0eff13c67aa8', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
-2025-02-07 21:12:14 INFO: Duplicate item skipped: {'id': '9b758170-f1ad-4fb8-b292-6c39e56e9515', 'type': 'comment', 'author': 'benmccann', 'timestamp': '2024-12-09T22:48:48Z', 'content': 'This removes 5 dependencies from the dependency tree'}
-2025-02-07 21:12:14 INFO: Duplicate item skipped: {'id': 'f8a06f4a-4960-4c42-9388-33282c6f3158', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
-2025-02-07 21:12:14 INFO: Duplicate item skipped: {'id': '07cff795-9910-4636-a5d7-f078f37a7dca', 'type': 'comment', 'author': 'socket-security', 'timestamp': '2024-12-09T22:56:28Z', 'content': 'New and removed dependencies detected.Learn more aboutSocket for GitHub ↗︎PackageNew capabilitiesTransitivesSizePublishernpm/@types/picomatch@3.0.1None018.1 kBtypes🚮 Removed packages:npm/@types/micromatch@4.0.6View full report↗︎'}
-2025-02-07 21:12:14 INFO: Finished scraping fixes. Total unique responses: 4
-2025-02-07 21:12:14 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/fixes.json
-2025-02-07 21:47:22 INFO: Submit button pressed.
-2025-02-07 21:47:22 INFO: Mode selected: issues
-2025-02-07 21:47:22 INFO: Starting scrape_all_github_issues for URL: https://github.com/vercel/nft/issues
-2025-02-07 21:47:22 INFO: Scraping single page of issues: https://github.com/vercel/nft/issues
-2025-02-07 21:47:22 DEBUG: Starting new HTTPS connection (1): github.com:443
-2025-02-07 21:47:22 DEBUG: https://github.com:443 "GET /vercel/nft/issues HTTP/1.1" 200 None
-2025-02-07 21:47:22 INFO: Received response with status code: 200
-2025-02-07 21:47:22 INFO: Found 12 issue rows on this page
-2025-02-07 21:47:22 INFO: Finished scraping all pages. Total unique issues: 12
-2025-02-07 21:47:22 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/issues.json
-2025-02-07 21:56:20 INFO: Submit button pressed.
-2025-02-07 21:56:20 INFO: Mode selected: issues
-2025-02-07 21:56:20 INFO: Starting scrape_all_github_issues for URL: https://github.com/vercel/vercel/issues
-2025-02-07 21:56:20 INFO: Scraping single page of issues: https://github.com/vercel/vercel/issues
-2025-02-07 21:56:20 DEBUG: Starting new HTTPS connection (1): github.com:443
-2025-02-07 21:56:21 DEBUG: https://github.com:443 "GET /vercel/vercel/issues HTTP/1.1" 200 None
-2025-02-07 21:56:21 INFO: Received response with status code: 200
-2025-02-07 21:56:21 INFO: Found 12 issue rows on this page
-2025-02-07 21:56:21 INFO: Finished scraping all pages. Total unique issues: 12
-2025-02-07 21:56:21 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/issues.json
-2025-02-07 22:00:21 INFO: Submit button pressed.
-2025-02-07 22:00:21 INFO: Mode selected: issues
-2025-02-07 22:00:21 INFO: Starting scrape_all_github_issues for URL: https://github.com/neovim/neovim/issues
-2025-02-07 22:00:21 INFO: Scraping single page of issues: https://github.com/neovim/neovim/issues
-2025-02-07 22:00:21 DEBUG: Starting new HTTPS connection (1): github.com:443
-2025-02-07 22:00:22 DEBUG: https://github.com:443 "GET /neovim/neovim/issues HTTP/1.1" 200 None
-2025-02-07 22:00:22 INFO: Received response with status code: 200
-2025-02-07 22:00:22 INFO: Found 12 issue rows on this page
-2025-02-07 22:00:22 INFO: Finished scraping all pages. Total unique issues: 12
-2025-02-07 22:00:22 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/issues.json
-2025-02-07 23:13:49 INFO: Submit button pressed.
-2025-02-07 23:13:49 INFO: Mode selected: issues
-2025-02-07 23:13:49 INFO: Starting scrape_github_issues (REST API) for URL: https://github.com/neovim/neovim/issues
-2025-02-07 23:13:49 ERROR: GITHUB_TOKEN missing in environment.
-2025-02-07 23:13:49 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/issues.json
-2025-02-07 23:34:48 INFO: Submit button pressed.
-2025-02-07 23:34:48 INFO: Mode selected: issues
-2025-02-07 23:34:48 INFO: Starting scrape_github_issues (REST API) for URL: https://github.com/neovim/neovim/issues
-2025-02-07 23:34:48 INFO: Requesting page=1 of issues for neovim/neovim
-2025-02-07 23:34:48 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:49 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:49 INFO: Requesting page=2 of issues for neovim/neovim
-2025-02-07 23:34:49 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:50 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:50 INFO: Requesting page=3 of issues for neovim/neovim
-2025-02-07 23:34:50 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:50 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:51 INFO: Requesting page=4 of issues for neovim/neovim
-2025-02-07 23:34:51 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:51 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:51 INFO: Requesting page=5 of issues for neovim/neovim
-2025-02-07 23:34:51 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:52 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:52 INFO: Requesting page=6 of issues for neovim/neovim
-2025-02-07 23:34:52 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:53 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:53 INFO: Requesting page=7 of issues for neovim/neovim
-2025-02-07 23:34:53 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:54 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:54 INFO: Requesting page=8 of issues for neovim/neovim
-2025-02-07 23:34:54 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:54 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:54 INFO: Requesting page=9 of issues for neovim/neovim
-2025-02-07 23:34:54 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:55 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:55 INFO: Requesting page=10 of issues for neovim/neovim
-2025-02-07 23:34:55 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:56 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:56 INFO: Requesting page=11 of issues for neovim/neovim
-2025-02-07 23:34:56 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:57 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:57 INFO: Requesting page=12 of issues for neovim/neovim
-2025-02-07 23:34:57 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:58 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=12&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:58 INFO: Requesting page=13 of issues for neovim/neovim
-2025-02-07 23:34:58 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:34:59 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=13&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:34:59 INFO: Requesting page=14 of issues for neovim/neovim
-2025-02-07 23:34:59 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:00 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=14&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:00 INFO: Requesting page=15 of issues for neovim/neovim
-2025-02-07 23:35:00 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:00 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=15&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:01 INFO: Requesting page=16 of issues for neovim/neovim
-2025-02-07 23:35:01 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:01 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=16&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:01 INFO: Requesting page=17 of issues for neovim/neovim
-2025-02-07 23:35:01 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:02 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=17&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:02 INFO: Requesting page=18 of issues for neovim/neovim
-2025-02-07 23:35:02 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:03 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=18&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:03 INFO: Requesting page=19 of issues for neovim/neovim
-2025-02-07 23:35:03 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:04 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=19&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:04 INFO: Requesting page=20 of issues for neovim/neovim
-2025-02-07 23:35:04 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:05 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=20&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:05 INFO: Requesting page=21 of issues for neovim/neovim
-2025-02-07 23:35:05 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:06 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=21&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:06 INFO: Requesting page=22 of issues for neovim/neovim
-2025-02-07 23:35:06 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:07 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=22&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:07 INFO: Requesting page=23 of issues for neovim/neovim
-2025-02-07 23:35:07 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:08 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=23&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:08 INFO: Requesting page=24 of issues for neovim/neovim
-2025-02-07 23:35:08 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:09 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=24&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:09 INFO: Requesting page=25 of issues for neovim/neovim
-2025-02-07 23:35:09 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:09 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=25&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:10 INFO: Requesting page=26 of issues for neovim/neovim
-2025-02-07 23:35:10 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:35:10 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=26&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:35:10 INFO: Requesting page=27 of issues for neovim/neovim
-2025-02-07 23:35:10 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:51:28 INFO: Submit button pressed.
-2025-02-07 23:51:28 INFO: Mode selected: issues
-2025-02-07 23:51:28 INFO: Starting scrape_github_issues (REST API) for URL: https://github.com/neovim/neovim/issues
-2025-02-07 23:51:28 INFO: Requesting page=1 of issues for neovim/neovim
-2025-02-07 23:51:28 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:51:28 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:51:29 INFO: Requesting page=2 of issues for neovim/neovim
-2025-02-07 23:51:29 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:51:29 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:51:29 INFO: Requesting page=3 of issues for neovim/neovim
-2025-02-07 23:51:29 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-07 23:51:30 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
-2025-02-07 23:51:30 INFO: Requesting page=4 of issues for neovim/neovim
-2025-02-07 23:51:30 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:05 INFO: Submit button pressed.
-2025-02-08 00:09:05 INFO: Mode selected: issues
-2025-02-08 00:09:05 INFO: Starting scrape_github_issues (REST API) for URL: https://github.com/neovim/neovim/issues
-2025-02-08 00:09:05 INFO: Requesting page=1 of issues for neovim/neovim
-2025-02-08 00:09:05 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:06 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:06 INFO: Requesting page=2 of issues for neovim/neovim
-2025-02-08 00:09:06 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:07 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:07 INFO: Requesting page=3 of issues for neovim/neovim
-2025-02-08 00:09:07 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:08 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:08 INFO: Requesting page=4 of issues for neovim/neovim
-2025-02-08 00:09:08 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:08 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:09 INFO: Requesting page=5 of issues for neovim/neovim
-2025-02-08 00:09:09 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:09 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:09 INFO: Requesting page=6 of issues for neovim/neovim
-2025-02-08 00:09:09 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:10 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:10 INFO: Requesting page=7 of issues for neovim/neovim
-2025-02-08 00:09:10 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:11 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:11 INFO: Requesting page=8 of issues for neovim/neovim
-2025-02-08 00:09:11 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:12 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:12 INFO: Requesting page=9 of issues for neovim/neovim
-2025-02-08 00:09:12 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:12 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:13 INFO: Requesting page=10 of issues for neovim/neovim
-2025-02-08 00:09:13 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:13 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:13 INFO: Requesting page=11 of issues for neovim/neovim
-2025-02-08 00:09:13 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:14 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:14 INFO: Requesting page=12 of issues for neovim/neovim
-2025-02-08 00:09:14 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:15 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=12&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:15 INFO: Requesting page=13 of issues for neovim/neovim
-2025-02-08 00:09:15 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:16 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=13&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:16 INFO: Requesting page=14 of issues for neovim/neovim
-2025-02-08 00:09:16 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:17 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=14&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:17 INFO: Requesting page=15 of issues for neovim/neovim
-2025-02-08 00:09:17 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:17 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=15&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:17 INFO: Requesting page=16 of issues for neovim/neovim
-2025-02-08 00:09:17 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:18 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=16&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:18 INFO: Requesting page=17 of issues for neovim/neovim
-2025-02-08 00:09:18 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:19 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=17&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:19 INFO: Requesting page=18 of issues for neovim/neovim
-2025-02-08 00:09:19 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:09:20 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=18&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:09:20 INFO: Requesting page=19 of issues for neovim/neovim
-2025-02-08 00:09:20 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:18 INFO: Submit button pressed.
-2025-02-08 00:14:18 INFO: Mode selected: issues
-2025-02-08 00:14:18 INFO: Starting scrape_github_issues (REST API) for URL: https://github.com/neovim/neovim/issues
-2025-02-08 00:14:18 INFO: Requesting page=1 of issues for neovim/neovim
-2025-02-08 00:14:18 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:18 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:19 INFO: Requesting page=2 of issues for neovim/neovim
-2025-02-08 00:14:19 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:19 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:20 INFO: Requesting page=3 of issues for neovim/neovim
-2025-02-08 00:14:20 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:20 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:20 INFO: Requesting page=4 of issues for neovim/neovim
-2025-02-08 00:14:20 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:21 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:21 INFO: Requesting page=5 of issues for neovim/neovim
-2025-02-08 00:14:21 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:22 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:22 INFO: Requesting page=6 of issues for neovim/neovim
-2025-02-08 00:14:22 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:23 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:23 INFO: Requesting page=7 of issues for neovim/neovim
-2025-02-08 00:14:23 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:23 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:23 INFO: Requesting page=8 of issues for neovim/neovim
-2025-02-08 00:14:24 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:24 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:24 INFO: Requesting page=9 of issues for neovim/neovim
-2025-02-08 00:14:24 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:25 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:25 INFO: Requesting page=10 of issues for neovim/neovim
-2025-02-08 00:14:25 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:26 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:26 INFO: Requesting page=11 of issues for neovim/neovim
-2025-02-08 00:14:26 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:27 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:27 INFO: Requesting page=12 of issues for neovim/neovim
-2025-02-08 00:14:27 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:28 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=12&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:28 INFO: Requesting page=13 of issues for neovim/neovim
-2025-02-08 00:14:28 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:28 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=13&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:29 INFO: Requesting page=14 of issues for neovim/neovim
-2025-02-08 00:14:29 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:29 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=14&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:29 INFO: Requesting page=15 of issues for neovim/neovim
-2025-02-08 00:14:29 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:30 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=15&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:30 INFO: Requesting page=16 of issues for neovim/neovim
-2025-02-08 00:14:30 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:31 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=16&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:31 INFO: Requesting page=17 of issues for neovim/neovim
-2025-02-08 00:14:31 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:32 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=17&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:32 INFO: Requesting page=18 of issues for neovim/neovim
-2025-02-08 00:14:32 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:33 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=18&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:33 INFO: Requesting page=19 of issues for neovim/neovim
-2025-02-08 00:14:33 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:34 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=19&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:34 INFO: Requesting page=20 of issues for neovim/neovim
-2025-02-08 00:14:34 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:35 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=20&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:35 INFO: Requesting page=21 of issues for neovim/neovim
-2025-02-08 00:14:35 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:35 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=21&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:36 INFO: Requesting page=22 of issues for neovim/neovim
-2025-02-08 00:14:36 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:36 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=22&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:36 INFO: Requesting page=23 of issues for neovim/neovim
-2025-02-08 00:14:36 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:37 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=23&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:37 INFO: Requesting page=24 of issues for neovim/neovim
-2025-02-08 00:14:37 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:38 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=24&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:38 INFO: Requesting page=25 of issues for neovim/neovim
-2025-02-08 00:14:38 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:39 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=25&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:39 INFO: Requesting page=26 of issues for neovim/neovim
-2025-02-08 00:14:39 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:40 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=26&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:40 INFO: Requesting page=27 of issues for neovim/neovim
-2025-02-08 00:14:40 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:41 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=27&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:41 INFO: Requesting page=28 of issues for neovim/neovim
-2025-02-08 00:14:41 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:42 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=28&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:42 INFO: Requesting page=29 of issues for neovim/neovim
-2025-02-08 00:14:42 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:43 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=29&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:43 INFO: Requesting page=30 of issues for neovim/neovim
-2025-02-08 00:14:43 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:44 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=30&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:44 INFO: Requesting page=31 of issues for neovim/neovim
-2025-02-08 00:14:44 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:45 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=31&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:45 INFO: Requesting page=32 of issues for neovim/neovim
-2025-02-08 00:14:45 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:46 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=32&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:46 INFO: Requesting page=33 of issues for neovim/neovim
-2025-02-08 00:14:46 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:47 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=33&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:47 INFO: Requesting page=34 of issues for neovim/neovim
-2025-02-08 00:14:47 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:48 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=34&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:48 INFO: Requesting page=35 of issues for neovim/neovim
-2025-02-08 00:14:48 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:48 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=35&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:49 INFO: Requesting page=36 of issues for neovim/neovim
-2025-02-08 00:14:49 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:49 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=36&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:50 INFO: Requesting page=37 of issues for neovim/neovim
-2025-02-08 00:14:50 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:50 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=37&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:50 INFO: Requesting page=38 of issues for neovim/neovim
-2025-02-08 00:14:50 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:14:51 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=38&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:14:51 INFO: Requesting page=39 of issues for neovim/neovim
-2025-02-08 00:14:51 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:35 INFO: Submit button pressed.
-2025-02-08 00:15:35 INFO: Mode selected: issues
-2025-02-08 00:15:35 INFO: Starting scrape_github_issues (REST API) for URL: https://github.com/neovim/neovim/issues
-2025-02-08 00:15:35 INFO: Requesting page=1 of issues for neovim/neovim
-2025-02-08 00:15:35 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:35 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:35 INFO: Requesting page=2 of issues for neovim/neovim
-2025-02-08 00:15:35 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:36 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:36 INFO: Requesting page=3 of issues for neovim/neovim
-2025-02-08 00:15:36 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:37 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:37 INFO: Requesting page=4 of issues for neovim/neovim
-2025-02-08 00:15:37 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:38 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:38 INFO: Requesting page=5 of issues for neovim/neovim
-2025-02-08 00:15:38 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:38 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:38 INFO: Requesting page=6 of issues for neovim/neovim
-2025-02-08 00:15:38 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:39 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:39 INFO: Requesting page=7 of issues for neovim/neovim
-2025-02-08 00:15:39 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:40 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:40 INFO: Requesting page=8 of issues for neovim/neovim
-2025-02-08 00:15:40 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:41 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:41 INFO: Requesting page=9 of issues for neovim/neovim
-2025-02-08 00:15:41 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:41 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:42 INFO: Requesting page=10 of issues for neovim/neovim
-2025-02-08 00:15:42 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:42 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:42 INFO: Requesting page=11 of issues for neovim/neovim
-2025-02-08 00:15:42 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:43 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:43 INFO: Requesting page=12 of issues for neovim/neovim
-2025-02-08 00:15:43 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:44 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=12&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:44 INFO: Requesting page=13 of issues for neovim/neovim
-2025-02-08 00:15:44 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:45 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=13&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:45 INFO: Requesting page=14 of issues for neovim/neovim
-2025-02-08 00:15:45 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:45 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=14&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:45 INFO: Requesting page=15 of issues for neovim/neovim
-2025-02-08 00:15:45 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:46 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=15&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:46 INFO: Requesting page=16 of issues for neovim/neovim
-2025-02-08 00:15:46 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:47 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=16&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:47 INFO: Requesting page=17 of issues for neovim/neovim
-2025-02-08 00:15:47 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:48 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=17&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:48 INFO: Requesting page=18 of issues for neovim/neovim
-2025-02-08 00:15:48 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:48 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=18&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:48 INFO: Requesting page=19 of issues for neovim/neovim
-2025-02-08 00:15:48 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:49 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=19&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:49 INFO: Requesting page=20 of issues for neovim/neovim
-2025-02-08 00:15:49 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:50 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=20&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:50 INFO: Requesting page=21 of issues for neovim/neovim
-2025-02-08 00:15:50 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:50 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=21&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:50 INFO: Requesting page=22 of issues for neovim/neovim
-2025-02-08 00:15:50 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:51 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=22&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:51 INFO: Requesting page=23 of issues for neovim/neovim
-2025-02-08 00:15:51 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:52 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=23&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:52 INFO: Requesting page=24 of issues for neovim/neovim
-2025-02-08 00:15:52 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:53 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=24&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:53 INFO: Requesting page=25 of issues for neovim/neovim
-2025-02-08 00:15:53 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:53 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=25&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:53 INFO: Requesting page=26 of issues for neovim/neovim
-2025-02-08 00:15:53 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:54 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=26&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:54 INFO: Requesting page=27 of issues for neovim/neovim
-2025-02-08 00:15:54 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:55 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=27&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:55 INFO: Requesting page=28 of issues for neovim/neovim
-2025-02-08 00:15:55 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:56 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=28&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:56 INFO: Requesting page=29 of issues for neovim/neovim
-2025-02-08 00:15:56 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:56 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=29&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:57 INFO: Requesting page=30 of issues for neovim/neovim
-2025-02-08 00:15:57 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:57 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=30&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:57 INFO: Requesting page=31 of issues for neovim/neovim
-2025-02-08 00:15:57 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:58 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=31&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:58 INFO: Requesting page=32 of issues for neovim/neovim
-2025-02-08 00:15:58 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:15:59 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=32&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:15:59 INFO: Requesting page=33 of issues for neovim/neovim
-2025-02-08 00:15:59 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:00 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=33&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:00 INFO: Requesting page=34 of issues for neovim/neovim
-2025-02-08 00:16:00 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:01 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=34&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:01 INFO: Requesting page=35 of issues for neovim/neovim
-2025-02-08 00:16:01 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:02 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=35&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:02 INFO: Requesting page=36 of issues for neovim/neovim
-2025-02-08 00:16:02 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:02 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=36&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:03 INFO: Requesting page=37 of issues for neovim/neovim
-2025-02-08 00:16:03 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:03 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=37&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:03 INFO: Requesting page=38 of issues for neovim/neovim
-2025-02-08 00:16:03 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:04 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=38&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:04 INFO: Requesting page=39 of issues for neovim/neovim
-2025-02-08 00:16:04 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:05 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=39&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:05 INFO: Requesting page=40 of issues for neovim/neovim
-2025-02-08 00:16:05 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:06 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=40&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:06 INFO: Requesting page=41 of issues for neovim/neovim
-2025-02-08 00:16:06 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:07 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=41&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:07 INFO: Requesting page=42 of issues for neovim/neovim
-2025-02-08 00:16:07 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:07 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=42&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:08 INFO: Requesting page=43 of issues for neovim/neovim
-2025-02-08 00:16:08 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:08 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=43&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:08 INFO: Requesting page=44 of issues for neovim/neovim
-2025-02-08 00:16:08 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:09 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=44&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:09 INFO: Requesting page=45 of issues for neovim/neovim
-2025-02-08 00:16:09 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:10 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=45&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:10 INFO: Requesting page=46 of issues for neovim/neovim
-2025-02-08 00:16:10 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:11 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=46&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:11 INFO: Requesting page=47 of issues for neovim/neovim
-2025-02-08 00:16:11 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:12 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=47&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:12 INFO: Requesting page=48 of issues for neovim/neovim
-2025-02-08 00:16:12 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:12 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=48&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:13 INFO: Requesting page=49 of issues for neovim/neovim
-2025-02-08 00:16:13 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:13 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=49&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:14 INFO: Requesting page=50 of issues for neovim/neovim
-2025-02-08 00:16:14 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:14 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=50&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:14 INFO: Requesting page=51 of issues for neovim/neovim
-2025-02-08 00:16:14 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:15 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=51&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:16 INFO: Requesting page=52 of issues for neovim/neovim
-2025-02-08 00:16:16 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:16 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=52&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:16 INFO: Requesting page=53 of issues for neovim/neovim
-2025-02-08 00:16:16 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:17 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=53&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:17 INFO: Requesting page=54 of issues for neovim/neovim
-2025-02-08 00:16:17 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:18 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=54&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:18 INFO: Requesting page=55 of issues for neovim/neovim
-2025-02-08 00:16:18 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:19 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=55&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:19 INFO: Requesting page=56 of issues for neovim/neovim
-2025-02-08 00:16:19 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:20 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=56&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:20 INFO: Requesting page=57 of issues for neovim/neovim
-2025-02-08 00:16:20 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:21 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=57&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:21 INFO: Requesting page=58 of issues for neovim/neovim
-2025-02-08 00:16:21 DEBUG: Starting new HTTPS connection (1): api.github.com:443
-2025-02-08 00:16:22 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=58&per_page=100 HTTP/1.1" 200 None
-2025-02-08 00:16:22 INFO: Requesting page=59 of issues for neovim/neovim
-2025-02-08 00:16:22 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+Ever since upgrading to Neovim 0.9, I've noticed a severe performance degradation when working with large Python files (15,000+ lines). The issue appears to be linked to Treesitter: every keystroke triggers a complete re-parse of the file, resulting in significant lag and occasional UI freezes. Disabling Treesitter entirely restores performance, but then I lose vital features like advanced syntax highlighting and code folding. This regression has been a major hindrance to my workflow, and I urgently need a fix before it disrupts my work on large codebases any further.
+2025-02-08 02:13:03 DEBUG: Output path resolved to: /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:13:03 DEBUG: Getting filtered keywords for URL: https://github.com/neovim/neovim/issues
+2025-02-08 02:13:03 DEBUG: Extracting keywords from prompt text.
+2025-02-08 02:13:03 DEBUG: Extracted keywords: ['performance', 'treesitter', 'bug', 'report', 'neovim', 'regression', 'large', '000', '15', 'advanced']
+2025-02-08 02:13:03 DEBUG: Parsing repository URL: https://github.com/neovim/neovim/issues
+2025-02-08 02:13:03 DEBUG: Parsed owner: neovim, repo: neovim
+2025-02-08 02:13:03 DEBUG: Filtered keywords (excluding repo 'neovim' and blocked list {'issue', 'fix', 'todo', 'test', 'error', 'bug', 'report', 'problem'}): ['performance', 'treesitter', 'regression', 'large', '000', '15', 'advanced']
+2025-02-08 02:13:03 DEBUG: Final keywords used: ['performance', 'treesitter', 'regression', 'large', '000']
+2025-02-08 02:13:03 DEBUG: Starting scraping task in background thread.
+2025-02-08 02:13:03 INFO: Starting filtered scrape for URL: https://github.com/neovim/neovim/issues
+2025-02-08 02:13:03 DEBUG: Parsing repository URL: https://github.com/neovim/neovim/issues
+2025-02-08 02:13:03 DEBUG: Parsed owner: neovim, repo: neovim
+2025-02-08 02:13:03 DEBUG: Only processing issues from after: 2024-11-10T07:13:03.114999+00:00
+2025-02-08 02:13:03 DEBUG: Output file /Users/mitchmcquoid/Desktop/issues.json initialized with header.
+2025-02-08 02:13:03 INFO: Fetching page 1
+2025-02-08 02:13:03 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 02:13:03 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:13:03 DEBUG: Page 1 returned 100 items.
+2025-02-08 02:13:03 DEBUG: Is final page? False
+2025-02-08 02:13:03 DEBUG: Issue #32359 matches keyword: treesitter
+2025-02-08 02:13:03 DEBUG: Added issue #32359 to chunk.
+2025-02-08 02:13:03 DEBUG: Issue #32333 matches keyword: treesitter
+2025-02-08 02:13:03 DEBUG: Added issue #32333 to chunk.
+2025-02-08 02:13:03 DEBUG: Issue #32332 matches keyword: 000
+2025-02-08 02:13:03 DEBUG: Added issue #32332 to chunk.
+2025-02-08 02:13:03 DEBUG: Issue #32319 matches keyword: 000
+2025-02-08 02:13:03 DEBUG: Added issue #32319 to chunk.
+2025-02-08 02:13:03 DEBUG: Issue #32285 matches keyword: treesitter
+2025-02-08 02:13:03 DEBUG: Added issue #32285 to chunk.
+2025-02-08 02:13:03 DEBUG: Issue #32278 matches keyword: treesitter
+2025-02-08 02:13:03 DEBUG: Added issue #32278 to chunk.
+2025-02-08 02:13:03 DEBUG: Issue #32255 matches keyword: treesitter
+2025-02-08 02:13:03 DEBUG: Added issue #32255 to chunk.
+2025-02-08 02:13:03 INFO: Fetching page 2
+2025-02-08 02:13:04 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=2&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:13:04 DEBUG: Page 2 returned 100 items.
+2025-02-08 02:13:04 DEBUG: Is final page? False
+2025-02-08 02:13:04 DEBUG: Issue #32247 matches keyword: large
+2025-02-08 02:13:04 DEBUG: Added issue #32247 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32235 matches keyword: treesitter
+2025-02-08 02:13:04 DEBUG: Added issue #32235 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32230 matches keyword: treesitter
+2025-02-08 02:13:04 DEBUG: Added issue #32230 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32228 matches keyword: treesitter
+2025-02-08 02:13:04 DEBUG: Added issue #32228 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32221 matches keyword: treesitter
+2025-02-08 02:13:04 DEBUG: Added issue #32221 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32210 matches keyword: treesitter
+2025-02-08 02:13:04 DEBUG: Added issue #32210 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32190 matches keyword: 000
+2025-02-08 02:13:04 DEBUG: Added issue #32190 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32166 matches keyword: 000
+2025-02-08 02:13:04 DEBUG: Added issue #32166 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32162 matches keyword: treesitter
+2025-02-08 02:13:04 DEBUG: Added issue #32162 to chunk.
+2025-02-08 02:13:04 INFO: Fetching page 3
+2025-02-08 02:13:04 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=3&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:13:04 DEBUG: Page 3 returned 100 items.
+2025-02-08 02:13:04 DEBUG: Is final page? False
+2025-02-08 02:13:04 DEBUG: Issue #32129 matches keyword: treesitter
+2025-02-08 02:13:04 DEBUG: Added issue #32129 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32120 matches keyword: treesitter
+2025-02-08 02:13:04 DEBUG: Added issue #32120 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32113 matches keyword: 000
+2025-02-08 02:13:04 DEBUG: Added issue #32113 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32109 matches keyword: 000
+2025-02-08 02:13:04 DEBUG: Added issue #32109 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32093 matches keyword: treesitter
+2025-02-08 02:13:04 DEBUG: Added issue #32093 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32092 matches keyword: 000
+2025-02-08 02:13:04 DEBUG: Added issue #32092 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32075 matches keyword: treesitter
+2025-02-08 02:13:04 DEBUG: Added issue #32075 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32068 matches keyword: 000
+2025-02-08 02:13:04 DEBUG: Added issue #32068 to chunk.
+2025-02-08 02:13:04 DEBUG: Issue #32054 matches keyword: large
+2025-02-08 02:13:04 DEBUG: Added issue #32054 to chunk.
+2025-02-08 02:13:04 INFO: Fetching page 4
+2025-02-08 02:13:05 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=4&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:13:05 DEBUG: Page 4 returned 100 items.
+2025-02-08 02:13:05 DEBUG: Is final page? False
+2025-02-08 02:13:05 DEBUG: Issue #31989 matches keyword: large
+2025-02-08 02:13:05 DEBUG: Added issue #31989 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31984 matches keyword: treesitter
+2025-02-08 02:13:05 DEBUG: Added issue #31984 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31969 matches keyword: treesitter
+2025-02-08 02:13:05 DEBUG: Added issue #31969 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31963 matches keyword: treesitter
+2025-02-08 02:13:05 DEBUG: Added issue #31963 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31956 matches keyword: 000
+2025-02-08 02:13:05 DEBUG: Added issue #31956 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31943 matches keyword: 000
+2025-02-08 02:13:05 DEBUG: Added issue #31943 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31925 matches keyword: 000
+2025-02-08 02:13:05 DEBUG: Added issue #31925 to chunk.
+2025-02-08 02:13:05 INFO: Fetching page 5
+2025-02-08 02:13:05 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=5&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:13:05 DEBUG: Page 5 returned 100 items.
+2025-02-08 02:13:05 DEBUG: Is final page? False
+2025-02-08 02:13:05 DEBUG: Issue #31918 matches keyword: large
+2025-02-08 02:13:05 DEBUG: Added issue #31918 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31915 matches keyword: performance
+2025-02-08 02:13:05 DEBUG: Added issue #31915 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31910 matches keyword: performance
+2025-02-08 02:13:05 DEBUG: Added issue #31910 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31897 matches keyword: 000
+2025-02-08 02:13:05 DEBUG: Added issue #31897 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31894 matches keyword: regression
+2025-02-08 02:13:05 DEBUG: Added issue #31894 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31863 matches keyword: 000
+2025-02-08 02:13:05 DEBUG: Added issue #31863 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31862 matches keyword: performance
+2025-02-08 02:13:05 DEBUG: Added issue #31862 to chunk.
+2025-02-08 02:13:05 DEBUG: Issue #31855 matches keyword: 000
+2025-02-08 02:13:05 DEBUG: Added issue #31855 to chunk.
+2025-02-08 02:13:05 INFO: Fetching page 6
+2025-02-08 02:13:06 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=6&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:13:06 DEBUG: Page 6 returned 100 items.
+2025-02-08 02:13:06 DEBUG: Is final page? False
+2025-02-08 02:13:06 DEBUG: Issue #31793 matches keyword: large
+2025-02-08 02:13:06 DEBUG: Added issue #31793 to chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31777 matches keyword: treesitter
+2025-02-08 02:13:06 DEBUG: Added issue #31777 to chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31758 matches keyword: treesitter
+2025-02-08 02:13:06 DEBUG: Added issue #31758 to chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31726 matches keyword: 000
+2025-02-08 02:13:06 DEBUG: Added issue #31726 to chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31715 matches keyword: treesitter
+2025-02-08 02:13:06 DEBUG: Added issue #31715 to chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31692 matches keyword: 000
+2025-02-08 02:13:06 DEBUG: Added issue #31692 to chunk.
+2025-02-08 02:13:06 INFO: Fetching page 7
+2025-02-08 02:13:06 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=7&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:13:06 DEBUG: Page 7 returned 100 items.
+2025-02-08 02:13:06 DEBUG: Is final page? False
+2025-02-08 02:13:06 DEBUG: Issue #31681 matches keyword: 000
+2025-02-08 02:13:06 DEBUG: Added issue #31681 to chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31680 matches keyword: 000
+2025-02-08 02:13:06 DEBUG: Added issue #31680 to chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31647 matches keyword: treesitter
+2025-02-08 02:13:06 DEBUG: Added issue #31647 to chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31636 matches keyword: 000
+2025-02-08 02:13:06 DEBUG: Added issue #31636 to chunk.
+2025-02-08 02:13:06 DEBUG: Writing chunk of 50 issues to file.
+2025-02-08 02:13:06 DEBUG: Chunk written to file. Resetting chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31610 matches keyword: treesitter
+2025-02-08 02:13:06 DEBUG: Added issue #31610 to chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31594 matches keyword: treesitter
+2025-02-08 02:13:06 DEBUG: Added issue #31594 to chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31593 matches keyword: treesitter
+2025-02-08 02:13:06 DEBUG: Added issue #31593 to chunk.
+2025-02-08 02:13:06 DEBUG: Issue #31579 matches keyword: treesitter
+2025-02-08 02:13:06 DEBUG: Added issue #31579 to chunk.
+2025-02-08 02:13:06 INFO: Fetching page 8
+2025-02-08 02:13:07 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=8&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:13:07 DEBUG: Page 8 returned 100 items.
+2025-02-08 02:13:07 DEBUG: Is final page? False
+2025-02-08 02:13:07 DEBUG: Issue #31555 matches keyword: treesitter
+2025-02-08 02:13:07 DEBUG: Added issue #31555 to chunk.
+2025-02-08 02:13:07 DEBUG: Issue #31544 matches keyword: treesitter
+2025-02-08 02:13:07 DEBUG: Added issue #31544 to chunk.
+2025-02-08 02:13:07 DEBUG: Issue #31515 matches keyword: treesitter
+2025-02-08 02:13:07 DEBUG: Added issue #31515 to chunk.
+2025-02-08 02:13:07 DEBUG: Issue #31506 matches keyword: performance
+2025-02-08 02:13:07 DEBUG: Added issue #31506 to chunk.
+2025-02-08 02:13:07 DEBUG: Issue #31468 matches keyword: treesitter
+2025-02-08 02:13:07 DEBUG: Added issue #31468 to chunk.
+2025-02-08 02:13:07 INFO: Fetching page 9
+2025-02-08 02:13:08 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=9&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:13:08 DEBUG: Page 9 returned 100 items.
+2025-02-08 02:13:08 DEBUG: Is final page? False
+2025-02-08 02:13:08 DEBUG: Issue #31454 matches keyword: performance
+2025-02-08 02:13:08 DEBUG: Added issue #31454 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31447 matches keyword: treesitter
+2025-02-08 02:13:08 DEBUG: Added issue #31447 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31437 matches keyword: regression
+2025-02-08 02:13:08 DEBUG: Added issue #31437 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31425 matches keyword: treesitter
+2025-02-08 02:13:08 DEBUG: Added issue #31425 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31384 matches keyword: regression
+2025-02-08 02:13:08 DEBUG: Added issue #31384 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31380 matches keyword: large
+2025-02-08 02:13:08 DEBUG: Added issue #31380 to chunk.
+2025-02-08 02:13:08 INFO: Fetching page 10
+2025-02-08 02:13:08 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=10&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:13:08 DEBUG: Page 10 returned 100 items.
+2025-02-08 02:13:08 DEBUG: Is final page? False
+2025-02-08 02:13:08 DEBUG: Issue #31335 matches keyword: treesitter
+2025-02-08 02:13:08 DEBUG: Added issue #31335 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31334 matches keyword: large
+2025-02-08 02:13:08 DEBUG: Added issue #31334 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31316 matches keyword: regression
+2025-02-08 02:13:08 DEBUG: Added issue #31316 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31315 matches keyword: treesitter
+2025-02-08 02:13:08 DEBUG: Added issue #31315 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31306 matches keyword: regression
+2025-02-08 02:13:08 DEBUG: Added issue #31306 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31271 matches keyword: treesitter
+2025-02-08 02:13:08 DEBUG: Added issue #31271 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31257 matches keyword: treesitter
+2025-02-08 02:13:08 DEBUG: Added issue #31257 to chunk.
+2025-02-08 02:13:08 DEBUG: Issue #31246 matches keyword: treesitter
+2025-02-08 02:13:08 DEBUG: Added issue #31246 to chunk.
+2025-02-08 02:13:08 INFO: Fetching page 11
+2025-02-08 02:13:09 DEBUG: https://api.github.com:443 "GET /repos/neovim/neovim/issues?state=all&page=11&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:13:09 DEBUG: Page 11 returned 100 items.
+2025-02-08 02:13:09 DEBUG: Is final page? True
+2025-02-08 02:13:09 DEBUG: Issue #31236 matches keyword: treesitter
+2025-02-08 02:13:09 DEBUG: Added issue #31236 to chunk.
+2025-02-08 02:13:09 DEBUG: Issue #31225 matches keyword: 000
+2025-02-08 02:13:09 DEBUG: Added issue #31225 to chunk.
+2025-02-08 02:13:09 DEBUG: Issue #31165 matches keyword: treesitter
+2025-02-08 02:13:09 DEBUG: Added issue #31165 to chunk.
+2025-02-08 02:13:09 DEBUG: Issue #31163 matches keyword: treesitter
+2025-02-08 02:13:09 DEBUG: Added issue #31163 to chunk.
+2025-02-08 02:13:09 INFO: Reached issues older than cutoff on page 11; stopping.
+2025-02-08 02:13:09 DEBUG: Writing chunk of 27 issues to file.
+2025-02-08 02:13:09 DEBUG: Final chunk written to file.
+2025-02-08 02:13:09 INFO: Finished writing output to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:13:09 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:14:15 INFO: GUI terminated successfully. Script finished.
+2025-02-08 02:17:02 DEBUG: Logging initialized. Project root: /Users/mitchmcquoid/z9b-projects/business_proj/www-gh-comms-scr
+2025-02-08 02:17:03 DEBUG: Tkinter GUI initialized.
+2025-02-08 02:17:03 DEBUG: Starting Tkinter main loop.
+2025-02-08 02:17:26 DEBUG: Submit button clicked.
+2025-02-08 02:17:26 DEBUG: URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:17:26 DEBUG: Prompt: After updating to the latest version, the theme doesn’t seem to apply correctly. The expected pastel color palette is missing—UI elements display mismatched colors and some components revert to default styling. I’ve double-checked my configuration against the installation guidelines, but the problem persists. Could this be a bug in the latest update or a compatibility issue? Any troubleshooting tips or workarounds would be greatly appreciated.
+2025-02-08 02:17:26 DEBUG: Output path resolved to: /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:17:26 DEBUG: Getting filtered keywords for URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:17:26 DEBUG: Extracting keywords from prompt text.
+2025-02-08 02:17:26 DEBUG: Extracted keywords: ['latest', 'apply', 'appreciated', 'bug', 'checked', 'color', 'colors', 'compatibility', 'components', 'configuration']
+2025-02-08 02:17:26 DEBUG: Parsing repository URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:17:26 DEBUG: Parsed owner: catppuccin, repo: ghostty
+2025-02-08 02:17:26 DEBUG: Filtered keywords (excluding repo 'ghostty' and blocked list {'fix', 'problem', 'issue', 'todo', 'bug', 'report', 'error', 'test'}): ['latest', 'apply', 'appreciated', 'checked', 'color', 'colors', 'compatibility', 'components', 'configuration']
+2025-02-08 02:17:26 DEBUG: Final keywords used: ['latest', 'apply', 'appreciated', 'checked', 'color']
+2025-02-08 02:17:26 DEBUG: Starting scraping task in background thread.
+2025-02-08 02:17:26 INFO: Starting filtered scrape for URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:17:26 DEBUG: Parsing repository URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:17:26 DEBUG: Parsed owner: catppuccin, repo: ghostty
+2025-02-08 02:17:26 DEBUG: Only processing issues from after: 2024-11-10T07:17:26.229507+00:00
+2025-02-08 02:17:26 DEBUG: Output file /Users/mitchmcquoid/Desktop/issues.json initialized with header.
+2025-02-08 02:17:26 INFO: Fetching page 1
+2025-02-08 02:17:26 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 02:17:26 DEBUG: https://api.github.com:443 "GET /repos/catppuccin/ghostty/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:17:26 DEBUG: Page 1 returned 11 items.
+2025-02-08 02:17:26 DEBUG: Is final page? True
+2025-02-08 02:17:26 DEBUG: Issue #6 matches keyword: color
+2025-02-08 02:17:26 DEBUG: Added issue #6 to chunk.
+2025-02-08 02:17:26 DEBUG: Issue #5 matches keyword: color
+2025-02-08 02:17:26 DEBUG: Added issue #5 to chunk.
+2025-02-08 02:17:26 INFO: Reached issues older than cutoff on page 1; stopping.
+2025-02-08 02:17:26 DEBUG: Writing chunk of 2 issues to file.
+2025-02-08 02:17:26 DEBUG: Final chunk written to file.
+2025-02-08 02:17:26 INFO: Finished writing output to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:17:26 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:24:50 DEBUG: Logging initialized. Project root: /Users/mitchmcquoid/z9b-projects/business_proj/www-gh-comms-scr
+2025-02-08 02:24:51 DEBUG: Tkinter GUI initialized.
+2025-02-08 02:24:51 DEBUG: Starting Tkinter main loop.
+2025-02-08 02:24:59 DEBUG: Submit button clicked.
+2025-02-08 02:24:59 DEBUG: URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:24:59 DEBUG: Prompt: After updating to the latest version, the theme doesn’t seem to apply correctly. The expected pastel color palette is missing—UI elements display mismatched colors and some components revert to default styling. I’ve double-checked my configuration against the installation guidelines, but the problem persists. Could this be a bug in the latest update or a compatibility issue? Any troubleshooting tips or workarounds would be greatly appreciated.
+2025-02-08 02:24:59 DEBUG: Output path resolved to: /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:24:59 DEBUG: Getting filtered keywords for URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:24:59 DEBUG: Extracting keywords from prompt text.
+2025-02-08 02:24:59 DEBUG: Extracted keywords: ['latest', 'apply', 'appreciated', 'bug', 'checked', 'color', 'colors', 'compatibility', 'components', 'configuration']
+2025-02-08 02:24:59 DEBUG: Parsing repository URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:24:59 DEBUG: Parsed owner: catppuccin, repo: ghostty
+2025-02-08 02:24:59 DEBUG: Filtered keywords (excluding repo 'ghostty' and blocked list {'report', 'test', 'error', 'issue', 'problem', 'bug', 'todo', 'fix'}): ['latest', 'apply', 'appreciated', 'checked', 'color', 'colors', 'compatibility', 'components', 'configuration']
+2025-02-08 02:24:59 DEBUG: Final keywords used: ['latest', 'apply', 'appreciated', 'checked', 'color']
+2025-02-08 02:24:59 DEBUG: Starting scraping task in background thread.
+2025-02-08 02:24:59 INFO: Starting filtered scrape for URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:24:59 DEBUG: Parsing repository URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:24:59 DEBUG: Parsed owner: catppuccin, repo: ghostty
+2025-02-08 02:24:59 DEBUG: Only processing issues from after: 2024-11-10T07:24:59.707139+00:00
+2025-02-08 02:24:59 DEBUG: Output file /Users/mitchmcquoid/Desktop/issues.json initialized with header.
+2025-02-08 02:24:59 INFO: Fetching page 1
+2025-02-08 02:24:59 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 02:25:00 DEBUG: https://api.github.com:443 "GET /repos/catppuccin/ghostty/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:25:00 DEBUG: Page 1 returned 11 items.
+2025-02-08 02:25:00 DEBUG: Is final page? True
+2025-02-08 02:25:00 DEBUG: Issue #6 matches keyword: color
+2025-02-08 02:25:00 DEBUG: Added issue #6 to chunk.
+2025-02-08 02:25:00 DEBUG: Issue #5 matches keyword: color
+2025-02-08 02:25:00 DEBUG: Added issue #5 to chunk.
+2025-02-08 02:25:00 INFO: Reached issues older than cutoff on page 1; stopping.
+2025-02-08 02:25:00 DEBUG: Writing chunk of 2 issues to file.
+2025-02-08 02:25:00 DEBUG: Final chunk written to file.
+2025-02-08 02:25:00 INFO: Finished writing output to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:25:00 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:26:35 INFO: GUI terminated successfully. Script finished.
+2025-02-08 02:26:48 DEBUG: Logging initialized. Project root: /Users/mitchmcquoid/z9b-projects/business_proj/www-gh-comms-scr
+2025-02-08 02:26:48 DEBUG: Tkinter GUI initialized.
+2025-02-08 02:26:48 DEBUG: Starting Tkinter main loop.
+2025-02-08 02:27:04 DEBUG: Submit button clicked.
+2025-02-08 02:27:04 DEBUG: URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:27:04 DEBUG: Prompt: After updating to the latest version, the theme doesn’t seem to apply correctly. The expected pastel color palette is missing—UI elements display mismatched colors and some components revert to default styling. I’ve double-checked my configuration against the installation guidelines, but the problem persists. Could this be a bug in the latest update or a compatibility issue? Any troubleshooting tips or workarounds would be greatly appreciated.
+2025-02-08 02:27:04 DEBUG: Output path resolved to: /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:27:04 DEBUG: Getting filtered keywords for URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:27:04 DEBUG: Extracting keywords from prompt text.
+2025-02-08 02:27:04 DEBUG: Extracted keywords: ['latest', 'apply', 'appreciated', 'bug', 'checked', 'color', 'colors', 'compatibility', 'components', 'configuration']
+2025-02-08 02:27:04 DEBUG: Parsing repository URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:27:04 DEBUG: Parsed owner: catppuccin, repo: ghostty
+2025-02-08 02:27:04 DEBUG: Filtered keywords (excluding repo 'ghostty' and blocked list {'fix', 'test', 'issue', 'problem', 'report', 'error', 'todo', 'bug'}): ['latest', 'apply', 'appreciated', 'checked', 'color', 'colors', 'compatibility', 'components', 'configuration']
+2025-02-08 02:27:04 DEBUG: Final keywords used: ['latest', 'apply', 'appreciated', 'checked', 'color']
+2025-02-08 02:27:04 DEBUG: Starting scraping task in background thread.
+2025-02-08 02:27:04 INFO: Starting filtered scrape for URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:27:04 DEBUG: Parsing repository URL: https://github.com/catppuccin/ghostty/issues
+2025-02-08 02:27:04 DEBUG: Parsed owner: catppuccin, repo: ghostty
+2025-02-08 02:27:04 DEBUG: Only processing issues from after: 2024-11-10T07:27:04.043946+00:00
+2025-02-08 02:27:04 DEBUG: Output file /Users/mitchmcquoid/Desktop/issues.json initialized with header.
+2025-02-08 02:27:04 INFO: Fetching page 1
+2025-02-08 02:27:04 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 02:27:04 DEBUG: https://api.github.com:443 "GET /repos/catppuccin/ghostty/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:27:04 DEBUG: Page 1 returned 11 items.
+2025-02-08 02:27:04 DEBUG: Is final page? True
+2025-02-08 02:27:04 DEBUG: Issue #6 matches keyword: color
+2025-02-08 02:27:04 DEBUG: Added issue #6 to chunk.
+2025-02-08 02:27:04 DEBUG: Issue #5 matches keyword: color
+2025-02-08 02:27:04 DEBUG: Added issue #5 to chunk.
+2025-02-08 02:27:04 INFO: Reached issues older than cutoff on page 1; stopping.
+2025-02-08 02:27:04 DEBUG: Writing chunk of 2 issues to file.
+2025-02-08 02:27:04 DEBUG: Final chunk written to file.
+2025-02-08 02:27:04 INFO: Finished writing output to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:27:04 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:27:37 INFO: GUI terminated successfully. Script finished.
+2025-02-08 02:28:10 DEBUG: Logging initialized. Project root: /Users/mitchmcquoid/z9b-projects/business_proj/www-gh-comms-scr
+2025-02-08 02:28:10 DEBUG: Tkinter GUI initialized.
+2025-02-08 02:28:10 DEBUG: Starting Tkinter main loop.
+2025-02-08 02:29:51 DEBUG: Logging initialized. Project root: /Users/mitchmcquoid/z9b-projects/business_proj/www-gh-comms-scr
+2025-02-08 02:29:51 DEBUG: Tkinter GUI initialized.
+2025-02-08 02:29:51 DEBUG: Starting Tkinter main loop.
+2025-02-08 02:29:56 INFO: GUI terminated successfully. Script finished.
+2025-02-08 02:35:42 DEBUG: Logging initialized. Project root: /Users/mitchmcquoid/z9b-projects/business_proj/www-gh-comms-scr
+2025-02-08 02:35:42 DEBUG: Tkinter GUI initialized.
+2025-02-08 02:35:42 DEBUG: Starting Tkinter main loop.
+2025-02-08 02:37:44 DEBUG: Submit button clicked.
+2025-02-08 02:37:44 DEBUG: URL: https://github.com/Yash-Handa/logo-ls/issues
+2025-02-08 02:37:44 DEBUG: Prompt: I’m running logo-ls on macOS Catalina and noticed that when I narrow my terminal window to under 80 columns, the logo doesn’t resize and instead overlaps with the file listing, which makes it nearly impossible to read—this fixed-width issue seems to ignore terminal dimensions entirely, and while I’m using Terminal.app with what I believe is the latest version, the behavior persists, leading me to suspect that there’s a bug in how the logo’s width is determined or adjusted, and I’d really appreciate a look into this since it disrupts my usual workflow.
+2025-02-08 02:37:44 DEBUG: Output path resolved to: /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:37:44 DEBUG: Getting filtered keywords for URL: https://github.com/Yash-Handa/logo-ls/issues
+2025-02-08 02:37:44 DEBUG: Extracting keywords from prompt text.
+2025-02-08 02:37:44 DEBUG: Extracted keywords: ['logo', 'terminal', 'width', '80', 'adjusted', 'app', 'appreciate', 'behavior', 'believe', 'bug']
+2025-02-08 02:37:44 DEBUG: Parsing repository URL: https://github.com/Yash-Handa/logo-ls/issues
+2025-02-08 02:37:44 DEBUG: Parsed owner: Yash-Handa, repo: logo-ls
+2025-02-08 02:37:44 DEBUG: Filtered keywords (excluding repo 'logo-ls' and blocked list {'issue', 'error', 'report', 'todo', 'bug', 'fix', 'test', 'problem'}): ['logo', 'terminal', 'width', '80', 'adjusted', 'app', 'appreciate', 'behavior', 'believe']
+2025-02-08 02:37:44 DEBUG: Final keywords used: ['logo', 'terminal', 'width', '80', 'adjusted']
+2025-02-08 02:37:44 DEBUG: Starting scraping task in background thread.
+2025-02-08 02:37:44 INFO: Starting filtered scrape for URL: https://github.com/Yash-Handa/logo-ls/issues
+2025-02-08 02:37:44 DEBUG: Parsing repository URL: https://github.com/Yash-Handa/logo-ls/issues
+2025-02-08 02:37:44 DEBUG: Parsed owner: Yash-Handa, repo: logo-ls
+2025-02-08 02:37:44 DEBUG: Only processing issues from after: 2024-11-10T07:37:44.797484+00:00
+2025-02-08 02:37:44 DEBUG: Output file /Users/mitchmcquoid/Desktop/issues.json initialized with header.
+2025-02-08 02:37:44 INFO: Fetching page 1
+2025-02-08 02:37:44 DEBUG: Starting new HTTPS connection (1): api.github.com:443
+2025-02-08 02:37:45 DEBUG: https://api.github.com:443 "GET /repos/Yash-Handa/logo-ls/issues?state=all&page=1&per_page=100 HTTP/1.1" 200 None
+2025-02-08 02:37:45 DEBUG: Page 1 returned 55 items.
+2025-02-08 02:37:45 DEBUG: Is final page? True
+2025-02-08 02:37:45 INFO: Reached issues older than cutoff on page 1; stopping.
+2025-02-08 02:37:45 INFO: Finished writing output to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:37:45 INFO: Scraping completed; results written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-08 02:38:08 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:23 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:25 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:26 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:26 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:27 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:27 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:27 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:27 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:30 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:30 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:30 DEBUG: Window close requested after submission; waiting for task to finish.
+2025-02-08 02:38:33 DEBUG: Window close requested after submission; waiting for task to finish.
