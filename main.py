@@ -2,12 +2,12 @@
 import os
 import re
 import requests
-from dotenv import load_dotenv
 import json
 import tkinter as tk
 import logging
 import uuid
-
+from dotenv import load_dotenv
+load_dotenv()
 # --------------------- Logging Setup ---------------------
 project_root = os.path.dirname(os.path.abspath(__file__))
 log_file = os.path.join(project_root, "scrape.log")
@@ -33,7 +33,7 @@ def deduplicate_items(items, key_func):
             logger.info("Duplicate item skipped: %s", item)
     return list(unique.values())
 
-# --------------------- Utility: Parse URL ---------------------
+# --------------------- Udtility: Parse URL ---------------------
 def parse_repo_url(url):
     """
     Parse a GitHub URL like 'https://github.com/owner/repo/issues'

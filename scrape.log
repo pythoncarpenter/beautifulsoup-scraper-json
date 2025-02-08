@@ -174,3 +174,8 @@
 2025-02-07 22:00:22 INFO: Found 12 issue rows on this page
 2025-02-07 22:00:22 INFO: Finished scraping all pages. Total unique issues: 12
 2025-02-07 22:00:22 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/issues.json
+2025-02-07 23:13:49 INFO: Submit button pressed.
+2025-02-07 23:13:49 INFO: Mode selected: issues
+2025-02-07 23:13:49 INFO: Starting scrape_github_issues (REST API) for URL: https://github.com/neovim/neovim/issues
+2025-02-07 23:13:49 ERROR: GITHUB_TOKEN missing in environment.
+2025-02-07 23:13:49 INFO: Results successfully written to /Users/mitchmcquoid/Desktop/issues.json
